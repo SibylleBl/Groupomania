@@ -6,6 +6,8 @@ const cors = require("cors");
 const path = require("path");
 
 const userRoutes = require("./routes/routeUser.js");
+const publicationsRoutes = require("./models/publications.js");
+
 mongoose
   .connect(process.env.MONGO_ID, {
     useNewUrlParser: true,
@@ -23,13 +25,12 @@ app.use((req, res, next) => {
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
   );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, PATCH, OPTIONS"
-  );
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
   next();
 });
 
+app.use("api/publications", publicationsRoutes);
 app.use("/api/auth", userRoutes);
+app.use("/images", express.static(path.join(__dirname, "images")));
 
 module.exports = app;

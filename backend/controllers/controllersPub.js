@@ -6,12 +6,9 @@ const fs = require("fs");
 exports.createPublication = (req, res, next) => {
   console.log(req.body);
   const pubObject = JSON.parse(req.body.publication);
-  //on enlève le champs id généré automatiquement par mongo car ce n'est pas le bon:
   delete pubObject._id;
-  // je supprime aussi le champs userId de la personne qui a créé l'objet car je ne veux pas faire confiance au client:
   delete pubObject._userId;
 
-  //j'utilise l'userId généré pas le token d'authentification:
   const publication = new publications({
     ...pubObject,
     imageUrl: `${req.protocol}://${req.get("host")}/images/${
@@ -23,7 +20,6 @@ exports.createPublication = (req, res, next) => {
     usersLiked: [],
   });
 
-  // j'enregistre ce nouvel objet dans la base de données:
   publication
     .save()
     .then(() => {
@@ -38,26 +34,20 @@ exports.createPublication = (req, res, next) => {
 // -------- MODIFICATION D'UNE PUBLICATION:
 
 exports.modifyPublication = (req, res, next) => {
-  //Je vérifie d'abord si l'utilisateur a transmit un fichier ou pas:
-  // si oui :
   const pubObject = req.file
     ? {
         ...JSON.parse(req.body.publication),
         imageUrl: `${req.protocol}://${req.get("host")}/image/${
           req.file.filename
         }`,
-        // si non, je récupère directement l'objet:
       }
     : { ...req.body };
 
-  // même mesure de sécurité qu'au dessus:
   delete pubObject._userId;
 
-  //Je récupère l'objet dans la base de données (afin d'être sûr que c'est l'utilisateur qui a créé l'objet qui cherche à le modifier):
   publications
     .findOne({ _id: req.params.id })
     .then((publication) => {
-      //si l'id est différent de celui du token, quelqu'un essaye de modifier un objet qui ne lui appartient pas:
       if (publication.userId != req.auth.userId) {
         res.status(401).json({ message: "Non-autorisé" });
       } else {
@@ -81,12 +71,10 @@ exports.deletePublication = (req, res, next) => {
   publications
     .findOne({ _id: req.params.id })
     .then((publication) => {
-      //je vérifie encore si c'est bien le propriétaire de l'objet qui demande la suppression:
       if (publication.userId != req.auth.userId) {
         res.status(401).json({ message: "Non-autorisé" });
       } else {
-        //je supprime l'objet de la base de données ET l'image du fichier images:
-        const filename = publication.imageUrl.split("/images")[1]; //--- emplacement de l'image
+        const filename = publication.imageUrl.split("/images")[1];
         fs.unlink(`images/${filename}`, () =>
           publications
             .deleteOne({ _id: req.params.id })
