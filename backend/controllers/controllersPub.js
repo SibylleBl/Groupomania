@@ -3,8 +3,7 @@ const fs = require("fs");
 
 // -------- CREATION D'UNE NOUVELLE PUBLICATION:
 
-exports.createPublication = (req, res, next) => {
-  console.log(req.body);
+exports.createPublication = (req, res) => {
   const pubObject = JSON.parse(req.body.publication);
   delete pubObject._id;
   delete pubObject._userId;
@@ -33,7 +32,7 @@ exports.createPublication = (req, res, next) => {
 
 // -------- MODIFICATION D'UNE PUBLICATION:
 
-exports.modifyPublication = (req, res, next) => {
+exports.modifyPublication = (req, res) => {
   const pubObject = req.file
     ? {
         ...JSON.parse(req.body.publication),
@@ -67,7 +66,7 @@ exports.modifyPublication = (req, res, next) => {
 
 // -------- SUPRESSION D'UNE PUBLICATION:
 
-exports.deletePublication = (req, res, next) => {
+exports.deletePublication = (req, res) => {
   publications
     .findOne({ _id: req.params.id })
     .then((publication) => {
@@ -81,7 +80,7 @@ exports.deletePublication = (req, res, next) => {
             .then(() =>
               res.status(200).json({ message: "Publication supprimée !" })
             )
-            .catch((error) => res.status(401).json({ error: error }))
+            .catch((error) => res.status(401).json({ error }))
         );
       }
     })
@@ -92,25 +91,25 @@ exports.deletePublication = (req, res, next) => {
 
 // -------- JE RECUPERE UNE PUBLICATION SPECIFIQUE:
 
-exports.getOnePublication = (req, res, next) => {
+exports.getOnePublication = (req, res) => {
   publications
     .findOne({ _id: req.params.id })
     .then((publication) => res.status(200).json(publication))
-    .catch((error) => res.status(404).json({ error: error }));
+    .catch((error) => res.status(404).json({ error }));
 };
 
 // -------- JE RECUPERE TOUTE LES PUBLICATIONS:
 
-exports.getAllPublications = (req, res, next) => {
+exports.getAllPublications = (req, res) => {
   publications
     .find()
     .then((allPub) => res.status(200).json(allPub))
-    .catch((error) => res.status(400).json({ error: error }));
+    .catch((error) => res.status(400).json({ error }));
 };
 
 // -------- GESTION DES LIKES ET DISLIKES:
 
-exports.likePublication = (req, res, next) => {
+exports.likePublication = (req, res) => {
   publications
     .findOne({ _id: req.params.id })
     .then((publication) => {
