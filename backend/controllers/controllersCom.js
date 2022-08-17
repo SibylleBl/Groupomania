@@ -10,6 +10,7 @@ exports.createComment = (req, res) => {
 
   const commentaire = new commentaires({
     ...comObject,
+    userId: req.auth.userId,
   });
 
   commentaire

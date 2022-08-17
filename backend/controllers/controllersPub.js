@@ -1,18 +1,20 @@
-const publications = require("../models/publications");
+const Publications = require("../models/publications");
 const fs = require("fs");
 
 // -------- CREATION D'UNE NOUVELLE PUBLICATION:
 
 exports.createPublication = (req, res) => {
-  const pubObject = JSON.parse(req.body.publication);
+  console.log("🚀 ~ file: controllersPub.js ~ line 8 ~ req.body", req.body);
+  const pubObject = req.body;
   delete pubObject._id;
   delete pubObject._userId;
 
-  const publication = new publications({
+  const publication = new Publications({
     ...pubObject,
-    imageUrl: `${req.protocol}://${req.get("host")}/images/${
-      req.file.filename
-    }`,
+    userId: req.auth.userId,
+    // imageUrl: `${req.protocol}://${req.get("host")}/images/${
+    //   req.file.filename
+    // }`,
     likes: 0,
     dislikes: 0,
     usersDisliked: [],
@@ -44,8 +46,7 @@ exports.modifyPublication = (req, res) => {
 
   delete pubObject._userId;
 
-  publications
-    .findOne({ _id: req.params.id })
+  Publications.findOne({ _id: req.params.id })
     .then((publication) => {
       if (publication.userId != req.auth.userId) {
         res.status(401).json({ message: "Non-autorisé" });
@@ -67,8 +68,7 @@ exports.modifyPublication = (req, res) => {
 // -------- SUPRESSION D'UNE PUBLICATION:
 
 exports.deletePublication = (req, res) => {
-  publications
-    .findOne({ _id: req.params.id })
+  Publications.findOne({ _id: req.params.id })
     .then((publication) => {
       if (publication.userId != req.auth.userId) {
         res.status(401).json({ message: "Non-autorisé" });
@@ -92,8 +92,7 @@ exports.deletePublication = (req, res) => {
 // -------- JE RECUPERE UNE PUBLICATION SPECIFIQUE:
 
 exports.getOnePublication = (req, res) => {
-  publications
-    .findOne({ _id: req.params.id })
+  Publications.findOne({ _id: req.params.id })
     .then((publication) => res.status(200).json(publication))
     .catch((error) => res.status(404).json({ error }));
 };
@@ -101,8 +100,7 @@ exports.getOnePublication = (req, res) => {
 // -------- JE RECUPERE TOUTE LES PUBLICATIONS:
 
 exports.getAllPublications = (req, res) => {
-  publications
-    .find()
+  Publications.find()
     .then((allPub) => res.status(200).json(allPub))
     .catch((error) => res.status(400).json({ error }));
 };
@@ -110,8 +108,7 @@ exports.getAllPublications = (req, res) => {
 // -------- GESTION DES LIKES ET DISLIKES:
 
 exports.likePublication = (req, res) => {
-  publications
-    .findOne({ _id: req.params.id })
+  Publications.findOne({ _id: req.params.id })
     .then((publication) => {
       switch (req.body.like) {
         case -1:

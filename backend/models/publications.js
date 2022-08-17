@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 
 const publicationsSchema = mongoose.Schema(
   {
-    commentId: { type: String, required: true },
-    posterId: { type: String, required: true },
+    commentId: [String],
+    userId: { type: String, required: true },
     title: { type: String, required: true },
     message: { type: String, required: true, maxlength: 500 },
     imageUrl: { type: String },

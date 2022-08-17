@@ -6,7 +6,8 @@ const cors = require("cors");
 const path = require("path");
 
 const userRoutes = require("./routes/routeUser.js");
-const publicationsRoutes = require("./models/publications.js");
+const publicationsRoutes = require("./routes/routePub");
+const commentairesRoutes = require("./routes/routeCom");
 
 mongoose
   .connect(process.env.MONGO_ID, {
@@ -31,6 +32,7 @@ app.use((req, res, next) => {
 
 app.use("/api/publications", publicationsRoutes);
 app.use("/api/auth", userRoutes);
+app.use("api/commentaires", commentairesRoutes);
 app.use("/images", express.static(path.join(__dirname, "images")));
 
 module.exports = app;

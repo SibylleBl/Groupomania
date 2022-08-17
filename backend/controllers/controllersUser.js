@@ -1,13 +1,13 @@
 const bcrypt = require("bcrypt");
-const user = require("../models/user.js");
+const User = require("../models/user.js");
 const jsonWebToken = require("jsonwebtoken");
 const env = require("dotenv").config();
 
-exports.signup = (req, res, next) => {
+exports.signup = (req, res) => {
   bcrypt
     .hash(req.body.password, 10)
     .then((hash) => {
-      const newUser = new user({
+      const newUser = new User({
         pseudo: req.body.pseudo,
         email: req.body.email,
         password: hash,
@@ -20,10 +20,13 @@ exports.signup = (req, res, next) => {
     .catch((error) => res.status(500).json({ error: error }));
 };
 
-exports.login = (req, res, next) => {
-  user
-    .find({ email: req.body.email, pseudo: req.body.pseudo })
+exports.login = (req, res) => {
+  User.findOne({ email: req.body.email })
     .then((user) => {
+      console.log(
+        "🚀 ~ file: controllersUser.js ~ line 26 ~ .then ~ user",
+        user
+      );
       if (user === null) {
         res
           .status(401)

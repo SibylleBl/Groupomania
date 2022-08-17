@@ -18,7 +18,7 @@ const normalizePort = (val) => {
 };
 
 // cette fonction renvoie un port valide (sous forme d'un numéro ou d'un string)
-const port = normalizePort(process.env.PORT || "3000");
+const port = normalizePort(process.env.PORT || "4000");
 // je dis à mon application sur quel port elle doit tourner (port(environnement ou 3000)):
 app.set("port", port);
 
@@ -59,4 +59,3 @@ server.on("listening", () => {
 
 // je configure le serveur pour qu'il écoute la const port définie plus haut
 server.listen(port);
-
