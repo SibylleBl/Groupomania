@@ -4,8 +4,8 @@ const fs = require("fs");
 // -------- CREATION D'UNE NOUVELLE PUBLICATION:
 
 exports.createPublication = (req, res) => {
-  console.log("🚀 ~ file: controllersPub.js ~ line 8 ~ req.body", req.body);
   const pubObject = req.body;
+  console.log("🚀 ~ file: controllersPub.js ~ line 8 ~ req.body", req.body);
   delete pubObject._id;
   delete pubObject._userId;
 

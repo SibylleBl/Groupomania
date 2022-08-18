@@ -59,3 +59,9 @@ exports.login = (req, res) => {
       res.status(500).json({ error });
     });
 };
+
+exports.getOneUser = (req, res) => {
+  User.findOne({ token: req.jsonWebToken })
+    .then((user) => res.status(200).json(user))
+    .catch((error) => res.status(404).json({ error }));
+};
