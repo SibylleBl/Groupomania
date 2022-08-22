@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import publication from "~/components/publication";
+import publication from "~/components/post";
 
 export default {
   components: {
