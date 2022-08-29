@@ -7,7 +7,10 @@
 
 <script>
 export default {
-  name: "publication",
+  name: "post",
   props: ["title", "content"],
+  data() {
+    return { maVariable: "coucou" };
+  },
 };
 </script>

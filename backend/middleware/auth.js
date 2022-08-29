@@ -5,6 +5,8 @@ const env = require("dotenv").config();
 module.exports = (req, res, next) => {
   // console.log(req);
   try {
+    //il faut enlever le next()
+    next();
     console.log("try");
     const token = req.headers.authorization.split(" ")[1];
     console.log(token);
