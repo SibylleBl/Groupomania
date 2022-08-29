@@ -61,7 +61,7 @@ exports.login = (req, res) => {
 };
 
 exports.getOneUser = (req, res) => {
-  User.findOne({ token: req.jsonWebToken })
+  User.findOne({ token: req.jsonWebToken }) // à corriger
     .then((user) => res.status(200).json(user))
     .catch((error) => res.status(404).json({ error }));
 };

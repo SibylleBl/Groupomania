@@ -3,22 +3,34 @@
   <html lang="fr">
     <body>
       <div id="app">
-        <h1>Bienvenue</h1>
+        <h1>Bienvenue{{ maVariable }}</h1>
         <NuxtLink to="/inscription">Je m'inscris</NuxtLink>
         <NuxtLink to="/profil">Mon profil</NuxtLink>
       </div>
 
-      <publication title="ma publication" content="bonjour vous" />
+      <post
+        v-if="posts.length > 0"
+        :title="maVariable"
+        content="bonjour vous"
+      />
     </body>
   </html>
 </template>
 
 <script>
-import publication from "~/components/post";
+import post from "~/components/post";
 
 export default {
   components: {
-    publication,
+    post,
+  },
+  data() {
+    return { maVariable: "Sibylle", posts: [] };
+  },
+  methods: {
+    changeMaVariable() {
+      this.maVariable = "toto";
+    },
   },
 };
 </script>

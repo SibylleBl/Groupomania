@@ -95,6 +95,7 @@ exports.getOnePublication = (req, res) => {
   Publications.findOne({ _id: req.params.id })
     .then((publication) => res.status(200).json(publication))
     .catch((error) => res.status(404).json({ error }));
+  return;
 };
 
 // -------- JE RECUPERE TOUTE LES PUBLICATIONS:
@@ -103,6 +104,7 @@ exports.getAllPublications = (req, res) => {
   Publications.find()
     .then((allPub) => res.status(200).json(allPub))
     .catch((error) => res.status(400).json({ error }));
+  return;
 };
 
 // -------- GESTION DES LIKES ET DISLIKES:
