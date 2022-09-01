@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>{{ title }}</h2>
-    <p>{{ content }}</p>
+    <p v-if="content">{{ content }}</p>
   </div>
 </template>
 

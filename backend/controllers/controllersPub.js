@@ -1,5 +1,6 @@
 const Publications = require("../models/publications");
 const fs = require("fs");
+const { error } = require("console");
 
 // -------- CREATION D'UNE NOUVELLE PUBLICATION:
 
@@ -92,10 +93,17 @@ exports.deletePublication = (req, res) => {
 // -------- JE RECUPERE UNE PUBLICATION SPECIFIQUE:
 
 exports.getOnePublication = (req, res) => {
-  Publications.findOne({ _id: req.params.id })
-    .then((publication) => res.status(200).json(publication))
-    .catch((error) => res.status(404).json({ error }));
-  return;
+  Publications.findOne({ _id: req.params.id }).then((publication) => {
+    console.log(
+      "🚀 ~ file: controllersPub.js ~ line 98 ~ .then ~ publication",
+      publication
+    );
+    res.status(200).json(publication);
+  });
+  // .catch((error) => {
+  //   console.log("🚀 ~ file: controllersPub.js ~ line 102 ~ error", error);
+  //   // res.status(404).json({ error });
+  // });
 };
 
 // -------- JE RECUPERE TOUTE LES PUBLICATIONS:
@@ -104,7 +112,12 @@ exports.getAllPublications = (req, res) => {
   Publications.find()
     .then((allPub) => res.status(200).json(allPub))
     .catch((error) => res.status(400).json({ error }));
-  return;
+};
+
+exports.getAllPublicationsdev = (req, res) => {
+  Publications.find()
+    .then((allPub) => res.status(200).json(allPub))
+    .catch((error) => res.status(400).json({ error }));
 };
 
 // -------- GESTION DES LIKES ET DISLIKES:

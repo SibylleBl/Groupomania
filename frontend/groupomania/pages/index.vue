@@ -1,35 +1,56 @@
 <template>
   <!DOCTYPE html>
   <html lang="fr">
-    <body>
-      <div id="app">
-        <h1>Bienvenue{{ maVariable }}</h1>
+    <section class="index">
+      <nav>
+        <h1>Bienvenue {{ name }}</h1>
         <NuxtLink to="/inscription">Je m'inscris</NuxtLink>
-        <NuxtLink to="/profil">Mon profil</NuxtLink>
-      </div>
+        <NuxtLink to="/connection">Je me connecte</NuxtLink>
+      </nav>
 
-      <post
-        v-if="posts.length > 0"
-        :title="maVariable"
-        content="bonjour vous"
-      />
-    </body>
+      <article class="main">
+        <div class="column-1">
+          <NuxtLink to="/profil">Mon profil</NuxtLink>
+        </div>
+        <div class="publication">
+          <div v-if="publications.length > 0" class="posts">
+            <div
+              v-for="publication in publications"
+              :key="publication.title"
+              class="post"
+            >
+              <post :title="publication.title" :content="publication.content" />
+            </div>
+          </div>
+        </div>
+        <div class="column-2">
+          <p>Mes contacts</p>
+        </div>
+      </article>
+    </section>
   </html>
 </template>
 
 <script>
-import post from "~/components/post";
-
 export default {
-  components: {
-    post,
-  },
+  // components: {
+  //   post,
+  // },
   data() {
-    return { maVariable: "Sibylle", posts: [] };
+    return {
+      name: "Sibylle",
+      publications: [],
+    };
   },
+  async fetch() {
+    this.publications = await this.$axios.$get(
+      "http://localhost:6666/api/publications/devtoutemespub"
+    );
+  },
+
   methods: {
-    changeMaVariable() {
-      this.maVariable = "toto";
+    changeName() {
+      this.name = "toto";
     },
   },
 };

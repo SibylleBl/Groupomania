@@ -1,7 +1,11 @@
 <template>
-  <div class="header">
-    <img src="../assets/logo/icon-left-font-monochrome-black.svg" />
-    <h1>Mon header</h1>
+  <div>
+    <header>
+      <img src="../assets/logo/icon-left-font-monochrome-black.svg" />
+    </header>
     <Nuxt />
+    <footer>
+      <h2>Mon footer</h2>
+    </footer>
   </div>
 </template>

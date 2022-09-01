@@ -1,21 +1,53 @@
 @import "./utils/variables";
 @import "./utils/mixins";
 
-.header {
+body {
+  max-width: 1440px;
+  height: auto;
+  margin: auto;
+  width: 100%;
+}
+
+header,
+footer {
   display: flex;
   align-items: center;
   flex-direction: column;
+  padding: 5em 0em;
+  border: 2px solid $red;
   img {
-    width: 100%;
+    width: 50%;
   }
 }
 
-body {
+.index {
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
   font-family: "Lato", sans-serif;
   font-size: 16px;
   background-color: $light-pink;
-  width: 80%;
+  width: 100%;
   margin: auto;
+  border: 2px solid $red;
+}
+
+.post {
+  width: auto;
+  padding: 1em;
+  margin: 1em;
+  border: 5px solid $red;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  margin-top: 2em;
+  width: 100%;
+  .column-1,
+  .column-2 {
+    border: 2px solid black;
+    padding: 1em;
+  }
 }
