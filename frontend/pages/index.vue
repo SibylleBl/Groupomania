@@ -39,11 +39,11 @@ export default {
       publications: [],
     };
   },
-  async fetch() {
-    this.publications = await this.$axios.$get(
-      "http://localhost:6666/api/publications/devtoutemespub"
-    );
-  },
+  // async fetch() {
+  //   this.publications = await this.$axios.$get(
+  //     "http://localhost:6666/api/publications/devtoutemespub"
+  //   );
+  // },
 
   methods: {
     changeName() {
