@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>{{ title }}</h2>
-    <p v-if="content">{{ content }}</p>
+    <p>{{ content }}</p>
   </div>
 </template>
 
@@ -10,7 +10,7 @@ export default {
   name: "post",
   props: ["title", "content"],
   data() {
-    return { maVariable: "coucou" };
+    return { maVariable: "pouet" };
   },
 };
 </script>

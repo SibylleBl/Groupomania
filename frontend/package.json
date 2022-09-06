@@ -10,6 +10,7 @@
     "sass": "sass --watch ./assets/sass/style.scss:./assets/css/style.css"
   },
   "dependencies": {
+    "@nuxtjs/auth-next": "5.0.0-1648802546.c9880dc",
     "@nuxtjs/axios": "^5.13.6",
     "axios": "^0.27.2",
     "core-js": "^3.19.3",

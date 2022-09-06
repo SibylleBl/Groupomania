@@ -50,4 +50,12 @@ footer img {
   padding: 1em;
 }
 
+.inscription,
+.connexion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 30%;
+}
+
 /*# sourceMappingURL=style.css.map */
