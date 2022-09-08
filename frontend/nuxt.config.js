@@ -47,7 +47,7 @@ export default {
             url: "http://localhost:6666/api/auth/login",
             method: "post",
           },
-          user: { url: "http://localhost:6666/api/auth/user", method: "get" },
+          user: { url: "http://localhost:6666/api/auth", method: "get" },
         },
       },
     },
@@ -56,7 +56,7 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 
-  // router: {
-  //   middleware: ["auth"],
-  // },
+  router: {
+    middleware: ["auth"],
+  },
 };

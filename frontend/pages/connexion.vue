@@ -1,24 +1,14 @@
 <template>
-  <div>
-    <form @submit.prevent="userLogin">
-      <div>
-        <label>Username</label>
-        <input type="text" v-model="login.email" />
-      </div>
-      <div>
-        <label>Password</label>
-        <input type="text" v-model="login.password" />
-      </div>
-      <div>
-        <button type="submit">Submit</button>
-      </div>
-    </form>
-  </div>
+  <FormulaireC></FormulaireC>
 </template>
 
 <script>
 export default {
+  layout: "LayConnexion",
+  auth: false,
+
   data() {
+    console.log(this);
     return {
       login: {
         email: "",
