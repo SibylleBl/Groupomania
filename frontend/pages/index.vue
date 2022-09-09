@@ -3,7 +3,7 @@
     <nav>
       <h1>Bienvenue {{ name }}</h1>
       <NuxtLink to="/inscription">Je m'inscris</NuxtLink>
-      <NuxtLink to="/connexion">Je me connecte</NuxtLink>
+      <NuxtLink to="/login">Je me connecte</NuxtLink>
     </nav>
 
     <article class="main">
@@ -22,7 +22,15 @@
         </div>
       </div>
       <div class="column-2">
-        <p>Mes contacts</p>
+        <div class="contact">
+          <p>Mes contacts</p>
+
+          <div class="users">
+            <div v-for="user in users" :key="user.name" class="user">
+              <userList :name="user.name" :email="user.email"></userList>
+            </div>
+          </div>
+        </div>
       </div>
     </article>
   </section>
@@ -30,6 +38,7 @@
 
 <script>
 export default {
+  // components: { userList },
   // components: {
   //   post,
   // },
@@ -37,6 +46,7 @@ export default {
     return {
       name: "Sibylle",
       publications: [],
+      users: [],
     };
   },
 
@@ -50,6 +60,7 @@ export default {
     this.publications = await this.$axios.$get(
       "http://localhost:6666/api/publications/devtoutemespub"
     );
+    this.users = await this.$axios.$get("http://localhost:6666/api/auth/");
   },
 };
 </script>

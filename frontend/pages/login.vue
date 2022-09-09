@@ -1,5 +1,8 @@
 <template>
-  <FormulaireC></FormulaireC>
+  <div>
+    <h1>test</h1>
+    <FormulaireC></FormulaireC>
+  </div>
 </template>
 
 <script>
@@ -8,7 +11,6 @@ export default {
   auth: false,
 
   data() {
-    console.log(this);
     return {
       login: {
         email: "",

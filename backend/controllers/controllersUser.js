@@ -8,7 +8,7 @@ exports.signup = (req, res) => {
     .hash(req.body.password, 10)
     .then((hash) => {
       const newUser = new User({
-        pseudo: req.body.pseudo,
+        name: req.body.name,
         email: req.body.email,
         password: hash,
       });
@@ -64,4 +64,10 @@ exports.getOneUser = (req, res) => {
   User.findOne({ id: req.body.userId }) // à corriger
     .then((user) => res.status(200).json(user))
     .catch((error) => res.status(404).json({ error }));
+};
+
+exports.getAllUsers = (req, res, next) => {
+  User.find()
+    .then((allUsers) => res.status(200).json(allUsers))
+    .catch((error) => res.status(400).json({ error: error }));
 };
