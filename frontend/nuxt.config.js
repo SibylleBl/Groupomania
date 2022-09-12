@@ -44,10 +44,17 @@ export default {
         },
         endpoints: {
           login: {
-            url: "http://localhost:6666/api/auth/login",
+            url: "http://localhost:3001/api/auth/login",
             method: "post",
           },
-          user: { url: "http://localhost:6666/api/auth", method: "get" },
+          user: {
+            url: "http://localhost:3001/api/auth/me",
+            method: "get",
+          },
+          // publication: {
+          //   url: "http://localhost:3001/api/auth/:id",
+          //   method: "get",
+          // },
         },
       },
     },
@@ -56,7 +63,7 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 
-  router: {
-    middleware: ["auth"],
-  },
+  // router: {
+  //   middleware: ["auth"],
+  // },
 };

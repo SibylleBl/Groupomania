@@ -1,7 +1,7 @@
 <template>
   <section class="index">
     <nav>
-      <h1>Bienvenue {{ name }}</h1>
+      <h1>Bienvenue {{ $auth.state.user.name }}</h1>
       <NuxtLink to="/inscription">Je m'inscris</NuxtLink>
       <NuxtLink to="/login">Je me connecte</NuxtLink>
     </nav>
@@ -38,29 +38,28 @@
 
 <script>
 export default {
+  name: "home page",
   // components: { userList },
   // components: {
   //   post,
   // },
   data() {
     return {
-      name: "Sibylle",
       publications: [],
       users: [],
     };
+  },
+
+  async fetch() {
+    this.publications = await this.$axios.$get(
+      "http://localhost:3001/api/publications/"
+    );
   },
 
   methods: {
     changeName() {
       this.name = "toto";
     },
-  },
-
-  async fetch() {
-    this.publications = await this.$axios.$get(
-      "http://localhost:6666/api/publications/devtoutemespub"
-    );
-    this.users = await this.$axios.$get("http://localhost:6666/api/auth/");
   },
 };
 </script>

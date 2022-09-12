@@ -14,6 +14,6 @@ router.get("/", auth, publicationsControllers.getAllPublications);
 router.post("/:id/like", auth, publicationsControllers.likePublication);
 
 // bac à sable
-router.get("/devtoutemespub", publicationsControllers.getAllPublicationsdev);
+// router.get("/devtoutemespub", publicationsControllers.getAllPublicationsdev);
 
 module.exports = router;

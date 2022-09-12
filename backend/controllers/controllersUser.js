@@ -23,10 +23,6 @@ exports.signup = (req, res) => {
 exports.login = (req, res) => {
   User.findOne({ email: req.body.email })
     .then((user) => {
-      console.log(
-        "🚀 ~ file: controllersUser.js ~ line 26 ~ .then ~ user",
-        user
-      );
       if (user === null) {
         res
           .status(401)
@@ -63,6 +59,12 @@ exports.login = (req, res) => {
 exports.getOneUser = (req, res) => {
   User.findOne({ id: req.body.userId }) // à corriger
     .then((user) => res.status(200).json(user))
+    .catch((error) => res.status(404).json({ error }));
+};
+
+exports.getMe = (req, res) => {
+  User.findOne({ id: req.auth.userId })
+    .then((user) => res.status(200).json({ user: user }))
     .catch((error) => res.status(404).json({ error }));
 };
 

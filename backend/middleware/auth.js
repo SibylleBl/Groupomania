@@ -1,7 +1,7 @@
 const jsonWebToken = require("jsonwebtoken");
 const env = require("dotenv").config();
 
-//middleware qui permet d'extraire les infos du token afin de les transmettre aux autres middlewares:
+//middleware qui permet d'extraire les infos du token et de les injecter dans une variable auth:
 module.exports = (req, res, next) => {
   // console.log(req);
   try {

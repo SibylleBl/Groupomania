@@ -13,6 +13,10 @@
       <label for="email">Adresse mail:</label>
       <input id="email" v-model="email" />
     </div>
+    <div>
+      <label for="password">Mot de passe:</label>
+      <input id="password" v-model="password" />
+    </div>
 
     <input class="button" type="submit" value="Submit" />
   </form>
