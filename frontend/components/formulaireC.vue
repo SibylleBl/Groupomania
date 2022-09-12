@@ -34,29 +34,12 @@ export default {
         let response = await this.$auth.loginWith("local", {
           data: this.login,
         });
+        this.$router.push("/");
         console.log(this.$auth.state);
       } catch (err) {
         console.log(err);
       }
     },
-
-    // userLogin() {
-    //   let path = "http://localhost:3001/api/auth/login";
-    //   let body = this.login;
-
-    //   axios
-    //     .post(path, body)
-    //     .then((res) => {
-    //       let user = { userId: res.data.userId, token: res.data.token };
-    //     })
-
-    //     .catch((error) => console.log(error));
-    // },
-
-    // setItemsToLocalStorage(thing) {
-    //   let send = localStorage.setItem("thing", JSON.stringify(thing));
-    //   return send;
-    // },
   },
 };
 </script>

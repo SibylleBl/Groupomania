@@ -38,7 +38,7 @@
 
 <script>
 export default {
-  name: "home page",
+  name: "home_page",
   // components: { userList },
   // components: {
   //   post,
