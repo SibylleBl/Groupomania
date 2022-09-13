@@ -12,6 +12,10 @@ exports.signup = (req, res) => {
         email: req.body.email,
         password: hash,
       });
+      console.log(
+        "🚀 ~ file: controllersUser.js ~ line 15 ~ .then ~ newUser",
+        newUser
+      );
       newUser
         .save()
         .then(() => res.status(201).json({ message: "Utilisateur créé !" }))

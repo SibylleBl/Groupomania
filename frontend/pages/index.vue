@@ -1,8 +1,9 @@
 <template>
   <section class="index">
     <nav>
-      <h1>Bienvenue {{ $auth.state.user.name }}</h1>
-      <NuxtLink to="/inscription">Je m'inscris</NuxtLink>
+      <h1 v-if="$auth.loggedIn">Bienvenue {{ $auth.state.user.name }}</h1>
+      <h1 v-else>Bienvenue inconnu</h1>
+      <NuxtLink to="/register">Je m'inscris</NuxtLink>
       <NuxtLink to="/login">Je me connecte</NuxtLink>
     </nav>
 

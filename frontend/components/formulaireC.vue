@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>Se connecter</h1>
     <form @submit.prevent="userLogin">
       <div>
         <label>E-mail:</label>
@@ -31,11 +32,11 @@ export default {
   methods: {
     async userLogin() {
       try {
-        let response = await this.$auth.loginWith("local", {
+        await this.$auth.loginWith("local", {
           data: this.login,
         });
         this.$router.push("/");
-        console.log(this.$auth.state);
+        console.log(this.$auth.$state);
       } catch (err) {
         console.log(err);
       }

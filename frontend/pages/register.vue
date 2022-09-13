@@ -1,5 +1,7 @@
 <template>
-  <FormulaireI></FormulaireI>
+  <div>
+    <FormulaireI></FormulaireI>
+  </div>
 </template>
 
 <script>

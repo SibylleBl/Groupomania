@@ -51,10 +51,6 @@ export default {
             url: "http://localhost:3001/api/auth/me",
             method: "get",
           },
-          // publication: {
-          //   url: "http://localhost:3001/api/auth/:id",
-          //   method: "get",
-          // },
         },
       },
     },
