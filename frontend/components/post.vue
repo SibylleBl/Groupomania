@@ -1,16 +1,14 @@
 <template>
   <div>
     <h2>{{ title }}</h2>
-    <p>{{ content }}</p>
+    <p>{{ message }}</p>
+    <p>{{ imageUrl }}</p>
   </div>
 </template>
 
 <script>
 export default {
   name: "post",
-  props: ["title", "content"],
-  data() {
-    return { maVariable: "pouet" };
-  },
+  props: ["title", "message", "imageUrl"],
 };
 </script>

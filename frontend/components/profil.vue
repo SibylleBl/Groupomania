@@ -2,12 +2,13 @@
   <div>
     <h2>{{ name }}</h2>
     <p>{{ email }}</p>
+    <!-- <p>{{ imageUrl }}</p> -->
   </div>
 </template>
 
 <script>
 export default {
-  name: "userList",
-  props: ["name", "email"],
+  name: "profil",
+  props: ["name", "email", "imageUrl"],
 };
 </script>

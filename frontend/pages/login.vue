@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="box_site">
     <FormulaireC></FormulaireC>
   </div>
 </template>

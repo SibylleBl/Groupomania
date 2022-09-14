@@ -1,7 +1,7 @@
 <template>
   <section class="index">
     <nav>
-      <h1 v-if="$auth.loggedIn">Bienvenue {{ $auth.state.user.name }}</h1>
+      <h1 v-if="$auth.loggedIn">Bienvenue {{ $auth.$state.user.name }}</h1>
       <h1 v-else>Bienvenue inconnu</h1>
       <NuxtLink to="/register">Je m'inscris</NuxtLink>
       <NuxtLink to="/login">Je me connecte</NuxtLink>
@@ -10,15 +10,20 @@
     <article class="main">
       <div class="column-1">
         <NuxtLink to="/profil">Mon profil</NuxtLink>
+        <profil :name="profil.name" :email="profil.email" />
       </div>
-      <div class="publication">
+      <div class="publications">
         <div v-if="publications.length > 0" class="posts">
           <div
             v-for="publication in publications"
             :key="publication.title"
             class="post"
           >
-            <post :title="publication.title" :content="publication.message" />
+            <post
+              :title="publication.title"
+              :message="publication.message"
+              :imageUrl="publication.imageUrl"
+            />
           </div>
         </div>
       </div>
@@ -39,15 +44,11 @@
 
 <script>
 export default {
-  name: "home_page",
-  // components: { userList },
-  // components: {
-  //   post,
-  // },
   data() {
     return {
       publications: [],
       users: [],
+      profil: {},
     };
   },
 
@@ -56,11 +57,11 @@ export default {
       "http://localhost:3001/api/publications/"
     );
   },
-
-  methods: {
-    changeName() {
-      this.name = "toto";
-    },
+  async fetch() {
+    this.users = await this.$axios.$get("http://localhost:3001/api/auth/");
+  },
+  async fetch() {
+    this.profil = await this.$axios.$get("http://localhost:3001/api/auth/me");
   },
 };
 </script>
