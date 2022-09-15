@@ -1,17 +1,28 @@
 <template>
   <div>
-    <nav>
-      <div class="nav_bar" v-if="$auth.loggedIn">
-        <button type="submit" @click="logout">Se déconnecter</button>
-      </div>
-      <div class="nav_bar" v-else>
-        <NuxtLink to="/login">Se connecter</NuxtLink>
-        <NuxtLink to="/register">S'inscrire</NuxtLink>
-      </div>
-    </nav>
     <div class="box_site">
       <header>
         <img src="../assets/logo/icon-left-font-monochrome-black.svg" />
+        <div class="welcome">
+          <h1 v-if="$auth.loggedIn">Bienvenue {{ $auth.$state.user.name }}</h1>
+          <h1 v-else>Bienvenue inconnu</h1>
+        </div>
+        <nav>
+          <div class="nav_bar" v-if="$auth.loggedIn">
+            <button onclick="window.location.href = '/profil'">
+              Mon profil
+            </button>
+            <button type="submit" @click="logout">Se déconnecter</button>
+          </div>
+          <div class="nav_bar" v-else>
+            <button onclick="window.location.href = '/login'">
+              Se connecter
+            </button>
+            <button onclick="window.location.href = '/register'">
+              S'inscrire
+            </button>
+          </div>
+        </nav>
       </header>
 
       <Nuxt />

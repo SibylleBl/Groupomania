@@ -4,8 +4,12 @@
     <NuxtLink to="/">Page d'accueil</NuxtLink>
 
     <div class="user">
-      <div v-for="user in users" :key="user.name" class="user">
-        <userList :name="user.name" :email="user.email"></userList>
+      <div class="user">
+        <userList
+          :name="$auth.$state.user.name"
+          :email="$auth.$state.user.email"
+          :imageUrl="$auth.$state.user.imageUrl"
+        ></userList>
       </div>
     </div>
   </div>
@@ -21,10 +25,6 @@ export default {
     };
   },
 
-  methods: {
-    async fetch() {
-      this.user = await this.$axios.$get("http://localhost:3001/api/auth/:id");
-    },
-  },
+  methods: {},
 };
 </script>
