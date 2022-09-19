@@ -44,7 +44,7 @@
           v-if="$auth.loggedIn"
           onclick="window.location.href = '/profil'"
         >
-          Mon profil
+          <font-awesome-icon icon="fa-solid fa-user" /> Mon profil
         </button>
       </div>
       <div class="contact">
@@ -80,6 +80,7 @@ export default {
     deletePost(value) {
       console.log(value);
       this.$axios.$delete("http://localhost:3001/api/publications/" + value);
+      document.location.reload();
     },
   },
 };

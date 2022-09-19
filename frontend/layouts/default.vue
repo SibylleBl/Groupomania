@@ -6,6 +6,9 @@
 
         <nav>
           <div class="nav_bar" v-if="$auth.loggedIn">
+            <button onclick="window.location.href = './newPost'">
+              Poster une publication
+            </button>
             <button type="submit" @click="logout">
               <font-awesome-icon icon="fa-solid fa-right-from-bracket" /> Se
               déconnecter

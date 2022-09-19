@@ -74,7 +74,7 @@ exports.deletePublication = (req, res) => {
       } else {
         const filename = publication.imageUrl.split("/images")[1];
         fs.unlink(`images/${filename}`, () =>
-          publications
+          publication
             .deleteOne({ _id: req.params.id })
             .then(() =>
               res.status(200).json({ message: "Publication supprimée !" })
