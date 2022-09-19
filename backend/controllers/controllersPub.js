@@ -13,9 +13,7 @@ exports.createPublication = (req, res) => {
   const publication = new Publications({
     ...pubObject,
     userId: req.auth.userId,
-    imageUrl: `${req.protocol}://${req.get("host")}/images/${
-      req.file.filename
-    }`, // à corriger car image "undefined"
+    imageUrl: `${req.protocol}://${req.get("host")}/images/${req.filename}`, // à corriger car image "undefined"
     likes: 0,
     dislikes: 0,
     usersDisliked: [],

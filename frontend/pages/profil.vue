@@ -11,6 +11,9 @@
           :imageUrl="$auth.$state.user.imageUrl"
         ></userList>
       </div>
+      <button onclick="window.location.href = './modifyProfil'">
+        Modifier
+      </button>
     </div>
   </div>
 </template>

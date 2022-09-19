@@ -60,11 +60,73 @@ header {
   background-color: #9ec8db;
 }
 header img {
-  width: 30%;
+  width: 40%;
+  margin-left: 1rem;
+  color: #3f6182;
+  padding: 1em;
 }
 header .nav_bar {
   display: flex;
   align-items: center;
+}
+
+.index {
+  display: flex;
+  max-width: 1440px;
+  margin-top: 5em;
+  justify-content: space-between;
+}
+.index .posts {
+  display: flex;
+  width: 60%;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.index .posts .post {
+  background-color: white;
+  width: 500px;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 2px 5px 16px 0px #3f6182;
+  margin-bottom: 3em;
+}
+.index .posts .post .user_pub {
+  display: flex;
+  border-radius: 15px 15px 0px 0px;
+  background-color: #9ec8db;
+  color: #3f6182;
+}
+.index .posts .post .pub {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #3f6182;
+}
+.index .posts .post .like_dislike {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1em;
+  background-color: #9ec8db;
+  border-radius: 0px 0px 15px 15px;
+  color: #3f6182;
+}
+.index .column {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  width: 30%;
+  color: #3f6182;
+}
+.index .column .users {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.index .column .users .user {
+  margin: 1em;
+  border: 5px solid #9ec8db;
 }
 
 /*# sourceMappingURL=style.css.map */

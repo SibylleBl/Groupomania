@@ -21,10 +21,42 @@ header {
   justify-content: space-between;
   background-color: $medium;
   img {
-    width: 30%;
+    width: 40%;
+    margin-left: 1rem;
+    color: $dark;
+    padding: 1em;
   }
+
   .nav_bar {
     display: flex;
     align-items: center;
+  }
+}
+
+.index {
+  display: flex;
+  max-width: 1440px;
+  margin-top: 5em;
+  justify-content: space-between;
+
+  .posts {
+    @include posts;
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    width: 30%;
+    color: $dark;
+    .users {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      .user {
+        margin: 1em;
+        border: 5px solid $medium;
+      }
+    }
   }
 }
