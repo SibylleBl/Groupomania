@@ -10,10 +10,13 @@ exports.createPublication = (req, res) => {
   delete pubObject._id;
   delete pubObject._userId;
 
+  console.log(req);
   const publication = new Publications({
     ...pubObject,
     userId: req.auth.userId,
-    imageUrl: `${req.protocol}://${req.get("host")}/images/${req.filename}`, // à corriger car image "undefined"
+    imageUrl: `${req.protocol}://${req.get("host")}/images/${
+      req.file.filename
+    }`, // à corriger car image "undefined"
     likes: 0,
     dislikes: 0,
     usersDisliked: [],
@@ -42,26 +45,35 @@ exports.modifyPublication = (req, res) => {
         }`,
       }
     : { ...req.body };
+  console.log(pubObject);
 
   delete pubObject._userId;
+  console.log(
+    "🚀 ~ file: controllersPub.js ~ line 49 ~ req.params.id",
+    req.params.id
+  );
+  Publications.findOne({ id: req.params.id })
 
-  Publications.findOne({ _id: req.params.id })
     .then((publication) => {
-      if (publication.userId != req.auth.userId) {
+      if (publication.userId !== req.auth.userId) {
+        console.log(publication.userId);
+        console.log(req.auth.userId);
         res.status(401).json({ message: "Non-autorisé" });
       } else {
-        publications
-          .updateOne(
-            { _id: req.params.id },
-            { ...pubObject, _id: req.params.id }
-          )
+        Publications.updateOne(
+          { id: req.params.id },
+          { ...pubObject, id: req.params.id }
+        )
           .then(() =>
             res.status(200).json({ message: "Publication modifiée !" })
           )
           .catch((error) => res.status(401).json({ error }));
       }
     })
-    .catch((error) => res.status(400).json({ error }));
+    .catch((error) => {
+      res.status(400).json({ error });
+      console.log("🚀 ~ file: controllersPub.js ~ line 65 ~ error", error);
+    });
 };
 
 // -------- SUPRESSION D'UNE PUBLICATION:
@@ -91,17 +103,13 @@ exports.deletePublication = (req, res) => {
 // -------- JE RECUPERE UNE PUBLICATION SPECIFIQUE:
 
 exports.getOnePublication = (req, res) => {
-  Publications.findOne({ _id: req.params.id }).then((publication) => {
-    console.log(
-      "🚀 ~ file: controllersPub.js ~ line 98 ~ .then ~ publication",
-      publication
-    );
-    res.status(200).json(publication);
-  });
-  // .catch((error) => {
-  //   console.log("🚀 ~ file: controllersPub.js ~ line 102 ~ error", error);
-  //   // res.status(404).json({ error });
-  // });
+  Publications.findOne({ id: req.params.id })
+    .then((publication) => {
+      res.status(200).json(publication);
+    })
+    .catch((error) => {
+      res.status(404).json({ error });
+    });
 };
 
 // -------- JE RECUPERE TOUTE LES PUBLICATIONS:
