@@ -26,12 +26,12 @@
           <font-awesome-icon icon="fa-solid fa-pen" />
         </NuxtLink>
         <div class="like_dislike">
-          <div class="like">
+          <button class="like" @click="likePost(publication._id)">
             <font-awesome-icon icon="fa-solid fa-thumbs-up" />
-          </div>
-          <div class="dislike">
+          </button>
+          <button class="dislike" @click="dislikePost(publication._id)">
             <font-awesome-icon icon="fa-solid fa-thumbs-down" />
-          </div>
+          </button>
         </div>
       </div>
     </div>
@@ -58,13 +58,13 @@
 </template>
 
 <script>
-import profilVue from "./profil.vue";
-
 export default {
   data() {
     return {
       publications: [],
       users: [],
+      likes: Number,
+      dislikes: Number,
     };
   },
 
@@ -79,7 +79,27 @@ export default {
     deletePost(value) {
       console.log(value);
       this.$axios.$delete("http://localhost:3001/api/publications/" + value);
-      document.location.reload();
+
+      // supprimer publication dans le tableau publications:
+
+      for (let i = 0; i < this.publications.length; i++) {
+        if (this.publications[i]._id === value) {
+          this.publications.splice(i, 1);
+        }
+      }
+    },
+
+    likePost(value) {
+      this.$axios.$post(
+        `"http://localhost:3001/api/publications/${value}/like"`
+      );
+    },
+
+    dislikePost(value) {
+      this.$axios.$post(
+        `"http://localhost:3001/api/publications/${value}/like"`
+      );
+      console.log(value);
     },
   },
 };

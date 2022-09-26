@@ -127,7 +127,6 @@ exports.likePublication = (req, res) => {
     .then((publication) => {
       switch (req.body.like) {
         case -1:
-          //
           if (!publication.usersDisliked.includes(req.body.userId)) {
             publication.usersDisliked.push(req.body.userId);
             publication.dislikes++;

@@ -10,18 +10,24 @@ exports.signup = (req, res) => {
       const newUser = new User({
         name: req.body.name,
         email: req.body.email,
+        imageUrl: `${req.protocol}://${req.get("host")}/image/${
+          req.file.filename
+        }`,
         password: hash,
       });
-      console.log(
-        "🚀 ~ file: controllersUser.js ~ line 15 ~ .then ~ newUser",
-        newUser
-      );
+
       newUser
         .save()
         .then(() => res.status(201).json({ message: "Utilisateur créé !" }))
-        .catch((error) => res.status(400).json({ error: error }));
+        .catch((error) => {
+          console.log(newUser);
+          res.status(400).json({ error: error });
+        });
     })
-    .catch((error) => res.status(500).json({ error: error }));
+    .catch((error) => {
+      console.log(req);
+      res.status(500).json({ error: error });
+    });
 };
 
 exports.login = (req, res) => {

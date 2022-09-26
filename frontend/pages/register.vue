@@ -7,5 +7,6 @@
 <script>
 export default {
   layout: "LayConnexion",
+  auth: false,
 };
 </script>

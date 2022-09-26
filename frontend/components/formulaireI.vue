@@ -1,23 +1,46 @@
 <template>
-  <form method="post" @submit.prevent="registerUser">
+  <form method="post">
     <h3>Inscription</h3>
     <div>
       <label for="name">Name:</label>
-      <input id="name" v-model="register.name" />
+      <input
+        id="name"
+        type="text"
+        ref="name"
+        v-model="register.name"
+        @change="uploadName"
+      />
       <p id="nameError"></p>
     </div>
     <div>
       <label for="email">Adresse mail:</label>
-      <input id="email" v-model="register.email" />
+      <input
+        id="email"
+        type="text"
+        ref="email"
+        v-model="register.email"
+        @change="uploadEmail"
+      />
       <p id="emailError"></p>
     </div>
     <div>
       <label for="password">Mot de passe:</label>
-      <input id="password" v-model="register.password" />
+      <input
+        id="password"
+        type="text"
+        ref="password"
+        v-model="register.password"
+        @change="uploadPassword"
+      />
       <p id="passwordError"></p>
     </div>
 
-    <input class="button" type="submit" value="Submit" />
+    <div>
+      <label for="image">image</label>
+      <input id="image" type="file" ref="file" @change="uploadImg" />
+    </div>
+
+    <button type="submit" @click="registerUser">Submit</button>
   </form>
 </template>
 
@@ -30,23 +53,46 @@ export default {
         name: "",
         email: "",
         password: "",
+        imageUrl: null,
       },
     };
   },
 
   methods: {
-    async registerUser() {
-      try {
-        await this.$axios.$post("http://localhost:3001/api/auth/signup", {
-          name: this.register.name,
-          email: this.register.email,
-          password: this.register.password,
-        });
+    uploadImg() {
+      this.imageUrl = this.$refs.file.files[0];
+    },
 
-        this.$router.push("/");
-      } catch (error) {
-        console.log(error);
-      }
+    uploadName() {
+      this.name = this.$refs.name.value;
+    },
+
+    uploadEmail() {
+      this.email = this.$refs.email.value;
+    },
+
+    uploadPassword() {
+      this.password = this.$refs.password.value;
+    },
+
+    registerUser() {
+      const headers = {
+        "Content-Type": "multipart/form-data",
+      };
+      const formData = new FormData();
+      formData.append("image", this.imageUrl);
+      formData.append("name", this.name);
+      formData.append("email", this.email);
+      formData.append("password", this.password);
+
+      this.$axios
+        .$post("http://localhost:3001/api/auth/signup", formData, {
+          headers,
+        })
+        .then((res) => {
+          res.data.files;
+          res.status;
+        });
     },
   },
 };

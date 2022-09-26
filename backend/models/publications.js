@@ -5,7 +5,7 @@ const publicationsSchema = mongoose.Schema(
     commentId: [String],
     userId: { type: String, required: true },
     title: { type: String, required: true },
-    message: { type: String, required: true, maxlength: 500 },
+    message: { type: String, required: true },
     imageUrl: { type: String },
     videoUrl: { type: String },
     likes: { type: Number, default: 0 },
