@@ -38,7 +38,7 @@ exports.modifyPublication = (req, res) => {
   const pubObject = req.file
     ? {
         ...JSON.parse(req.body.publication),
-        imageUrl: `${req.protocol}://${req.get("host")}/image/${
+        imageUrl: `${req.protocol}://${req.get("host")}/images/${
           req.file.filename
         }`,
       }

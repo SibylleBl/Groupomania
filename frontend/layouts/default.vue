@@ -2,7 +2,7 @@
   <div>
     <div class="box_site">
       <header>
-        <NuxtLink to="index">
+        <NuxtLink to="/">
           <img src="../assets/logo/icon-left-font-monochrome-white.svg" />
         </NuxtLink>
         <nav>

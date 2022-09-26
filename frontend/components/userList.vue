@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>imageUrl</p>
+    <img :src="`${imageUrl}`" />
     <h2>{{ name }}</h2>
     <p>{{ email }}</p>
   </div>
@@ -9,6 +9,6 @@
 <script>
 export default {
   name: "userList",
-  props: ["name", "email"],
+  props: ["name", "email", "imageUrl"],
 };
 </script>

@@ -59,6 +59,7 @@
 
 <script>
 export default {
+  auth: false,
   data() {
     return {
       publications: [],
@@ -73,6 +74,10 @@ export default {
       "http://localhost:3001/api/publications/"
     );
     this.users = await this.$axios.$get("http://localhost:3001/api/auth/");
+    console.log(
+      "🚀 ~ file: index.vue ~ line 77 ~ fetch ~  this.users",
+      this.users
+    );
   },
 
   methods: {

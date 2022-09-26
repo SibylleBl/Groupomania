@@ -5,11 +5,11 @@
 
     <div class="user">
       <div class="user">
-        <userList
+        <profil
           :name="$auth.$state.user.name"
           :email="$auth.$state.user.email"
           :imageUrl="$auth.$state.user.imageUrl"
-        ></userList>
+        ></profil>
       </div>
       <NuxtLink to="./modifyProfil"> Modifier </NuxtLink>
     </div>
@@ -22,10 +22,14 @@ export default {
     return {
       name: "Sibylle",
       publications: [],
-      users: [],
+      user: [],
     };
   },
 
-  methods: {},
+  methods: {
+    async fetch() {
+      this.user = await this.$axios.$get("http://localhost:3001/api/auth/me");
+    },
+  },
 };
 </script>

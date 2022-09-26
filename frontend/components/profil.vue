@@ -2,7 +2,7 @@
   <div>
     <h2>{{ name }}</h2>
     <p>{{ email }}</p>
-    <!-- <p>{{ imageUrl }}</p> -->
+    <img :src="`${imageUrl}`" />
   </div>
 </template>
 
