@@ -3,11 +3,23 @@
     <form>
       <div>
         <label>Titre:</label>
-        <input id="title" type="text" v-model="newPub.title" />
+        <input
+          id="title"
+          type="text"
+          ref="title"
+          @change="uploadTitle"
+          v-model="newPub.title"
+        />
       </div>
       <div>
         <label>Message:</label>
-        <input id="message" type="text" v-model="newPub.message" />
+        <input
+          id="message"
+          type="text"
+          ref="message"
+          @change="uploadMessage"
+          v-model="newPub.message"
+        />
       </div>
       <div>
         <label>Image:</label>
@@ -38,9 +50,17 @@ export default {
     uploadImg() {
       this.imageUrl = this.$refs.file.files[0];
       console.log(
-        "🚀 ~ file: newPost.vue ~ line 40 ~ uploadImg ~ this.imageUrl",
+        "🚀 ~ file: newPost.vue ~ line 40 ~ uploadImg ~  this.imageUrl",
         this.imageUrl
       );
+    },
+
+    uploadTitle() {
+      this.title = this.$refs.title.value;
+    },
+
+    uploadMessage() {
+      this.message = this.$refs.message.value;
     },
 
     createPost() {
@@ -48,15 +68,18 @@ export default {
         "Content-Type": "multipart/form-data",
       };
       const formData = new FormData();
-      formData.append("file", this.imageUrl);
+      formData.append("image", this.imageUrl);
+      formData.append("title", this.title);
+      formData.append("message", this.message);
 
-      this.$axios.$post("http://localhost:3001/api/publications/", formData, {
-        headers,
-      });
-      // .then((res) => {
-      //   res.data.files;
-      //   res.status;
-      // });
+      this.$axios
+        .$post("http://localhost:3001/api/publications/", formData, {
+          headers,
+        })
+        .then((res) => {
+          res.data.files;
+          res.status;
+        });
     },
   },
 };

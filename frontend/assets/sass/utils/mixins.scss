@@ -3,7 +3,7 @@
   padding: 0.5em;
   margin: 0.5em;
   border: none;
-  border-radius: 18px;
+  border-radius: 50vw;
   font-weight: bold;
   background-color: $dark;
   color: $light;
@@ -20,7 +20,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    border-radius: 10rem;
+    border-radius: 50vw;
     z-index: -2;
   }
   &:before {

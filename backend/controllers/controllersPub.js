@@ -9,7 +9,6 @@ exports.createPublication = (req, res) => {
   delete pubObject._id;
   delete pubObject._userId;
 
-  console.log(req);
   const publication = new Publications({
     ...pubObject,
     userId: req.auth.userId,
@@ -44,7 +43,7 @@ exports.modifyPublication = (req, res) => {
         }`,
       }
     : { ...req.body };
-  console.log(pubObject);
+  // console.log(pubObject);
 
   delete pubObject._userId;
 
@@ -52,8 +51,8 @@ exports.modifyPublication = (req, res) => {
 
     .then((publication) => {
       if (publication.userId !== req.auth.userId) {
-        console.log(publication.userId);
-        console.log(req.auth.userId);
+        // console.log(publication.userId);
+        // console.log(req.auth.userId);
         res.status(401).json({ message: "Non-autorisé" });
       } else {
         Publications.updateOne(
