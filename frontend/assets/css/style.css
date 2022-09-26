@@ -103,6 +103,9 @@ header .nav_bar {
   align-items: center;
   color: #3f6182;
 }
+.index .posts .post .pub img {
+  width: 300px;
+}
 .index .posts .post .like_dislike {
   display: flex;
   justify-content: space-around;

@@ -10,7 +10,6 @@
           <!-- ici le nom de la personne qui à créé la pub et sa photo -->
           <p>photo</p>
           <h2>Name</h2>
-          <p>{{ publication.userId }}</p>
         </div>
 
         <post
@@ -39,9 +38,7 @@
 
     <div class="column">
       <div class="welcome">
-        <h1 v-if="$auth.loggedIn">
-          Bienvenue {{ $auth.$state.user.name }} {{ $auth.$state.user._id }}
-        </h1>
+        <h1 v-if="$auth.loggedIn">Bienvenue {{ $auth.$state.user.name }}</h1>
         <h1 v-else>Bienvenue inconnu</h1>
         <button
           v-if="$auth.loggedIn"

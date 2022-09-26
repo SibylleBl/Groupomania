@@ -6,7 +6,6 @@ const { error } = require("console");
 
 exports.createPublication = (req, res) => {
   const pubObject = req.body;
-  console.log("🚀 ~ file: controllersPub.js ~ line 8 ~ req.body", req.body);
   delete pubObject._id;
   delete pubObject._userId;
 
@@ -48,10 +47,7 @@ exports.modifyPublication = (req, res) => {
   console.log(pubObject);
 
   delete pubObject._userId;
-  console.log(
-    "🚀 ~ file: controllersPub.js ~ line 49 ~ req.params.id",
-    req.params.id
-  );
+
   Publications.findOne({ id: req.params.id })
 
     .then((publication) => {
@@ -72,7 +68,6 @@ exports.modifyPublication = (req, res) => {
     })
     .catch((error) => {
       res.status(400).json({ error });
-      console.log("🚀 ~ file: controllersPub.js ~ line 65 ~ error", error);
     });
 };
 

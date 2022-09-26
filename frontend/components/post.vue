@@ -2,7 +2,7 @@
   <div>
     <h2>{{ title }}</h2>
     <p>{{ message }}</p>
-    <p>{{ imageUrl }}</p>
+    <img :src="`${imageUrl}`" />
     <p style="display: none">{{ _id }}</p>
   </div>
 </template>

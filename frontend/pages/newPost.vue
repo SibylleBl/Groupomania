@@ -12,10 +12,10 @@
       <div>
         <label>Image:</label>
         <!-- v-model ne supporte pas le type "file" -->
-        <input id="imageUrl" type="file" />
+        <input type="file" ref="file" @change="uploadImg" />
       </div>
       <div>
-        <button type="submit" @click="createPost()">Submit</button>
+        <button type="submit" @click="createPost">Submit</button>
       </div>
     </form>
   </div>
@@ -29,22 +29,34 @@ export default {
       newPub: {
         title: "",
         message: "",
-        imageUrl: "",
+        imageUrl: null,
       },
     };
   },
 
   methods: {
-    async createPost() {
-      try {
-        await this.$axios.$post("http://localhost:3001/api/publications/", {
-          title: this.newPub.title,
-          message: this.newPub.message,
-          imageUrl: this.newPub.imageUrl,
-        });
-      } catch (error) {
-        console.log(error);
-      }
+    uploadImg() {
+      this.imageUrl = this.$refs.file.files[0];
+      console.log(
+        "🚀 ~ file: newPost.vue ~ line 40 ~ uploadImg ~ this.imageUrl",
+        this.imageUrl
+      );
+    },
+
+    createPost() {
+      const headers = {
+        "Content-Type": "multipart/form-data",
+      };
+      const formData = new FormData();
+      formData.append("file", this.imageUrl);
+
+      this.$axios.$post("http://localhost:3001/api/publications/", formData, {
+        headers,
+      });
+      // .then((res) => {
+      //   res.data.files;
+      //   res.status;
+      // });
     },
   },
 };
