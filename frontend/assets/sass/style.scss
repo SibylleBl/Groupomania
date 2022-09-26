@@ -11,8 +11,10 @@ body {
   font-family: "lato", "arial";
 }
 
-button {
-  @include button;
+button,
+.link {
+  @include buttonandNL;
+  text-decoration: none;
 }
 
 header {

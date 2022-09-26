@@ -11,9 +11,7 @@
           :imageUrl="$auth.$state.user.imageUrl"
         ></userList>
       </div>
-      <button onclick="window.location.href = './modifyProfil'">
-        Modifier
-      </button>
+      <NuxtLink to="./modifyProfil"> Modifier </NuxtLink>
     </div>
   </div>
 </template>

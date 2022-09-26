@@ -13,9 +13,7 @@
       <input id="imageUrl" />
     </div>
 
-    <button onclick="window.location.href = './modifyPassword'">
-      Changer mon mot de passe
-    </button>
+    <NuxtLink to="./modifyPassword"> Changer mon mot de passe </NuxtLink>
 
     <button>Enregistrer</button>
   </form>

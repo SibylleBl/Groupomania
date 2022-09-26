@@ -22,7 +22,7 @@
         <button @click="deletePost(publication._id)">
           <font-awesome-icon icon="fa-solid fa-trash" />
         </button>
-        <NuxtLink :to="`/modifyPublication/${publication._id}`">
+        <NuxtLink class="link" :to="`/modifyPublication/${publication._id}`">
           <font-awesome-icon icon="fa-solid fa-pen" />
         </NuxtLink>
         <div class="like_dislike">
@@ -40,12 +40,9 @@
       <div class="welcome">
         <h1 v-if="$auth.loggedIn">Bienvenue {{ $auth.$state.user.name }}</h1>
         <h1 v-else>Bienvenue inconnu</h1>
-        <button
-          v-if="$auth.loggedIn"
-          onclick="window.location.href = '/profil'"
-        >
+        <NuxtLink class="link" v-if="$auth.loggedIn" to="profil">
           <font-awesome-icon icon="fa-solid fa-user" /> Mon profil
-        </button>
+        </NuxtLink>
       </div>
       <div class="contact">
         <p>Vous connaissez peut-être:</p>
@@ -61,6 +58,8 @@
 </template>
 
 <script>
+import profilVue from "./profil.vue";
+
 export default {
   data() {
     return {

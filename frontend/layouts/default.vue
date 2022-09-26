@@ -2,26 +2,27 @@
   <div>
     <div class="box_site">
       <header>
-        <img src="../assets/logo/icon-left-font-monochrome-white.svg" />
-
+        <NuxtLink to="index">
+          <img src="../assets/logo/icon-left-font-monochrome-white.svg" />
+        </NuxtLink>
         <nav>
           <div class="nav_bar" v-if="$auth.loggedIn">
-            <button onclick="window.location.href = './newPost'">
+            <NuxtLink class="link" to="./newPost">
               Poster une publication
-            </button>
+            </NuxtLink>
             <button type="submit" @click="logout">
               <font-awesome-icon icon="fa-solid fa-right-from-bracket" /> Se
               déconnecter
             </button>
           </div>
           <div class="nav_bar" v-else>
-            <button onclick="window.location.href = '/login'">
+            <NuxtLink class="link" to="/login">
               <font-awesome-icon icon="fa-solid fa-right-to-bracket" /> Se
               connecter
-            </button>
-            <button onclick="window.location.href = '/register'">
+            </NuxtLink>
+            <NuxtLink class="link" to="/register">
               <font-awesome-icon icon="fa-solid fa-hands" /> S'inscrire
-            </button>
+            </NuxtLink>
           </div>
         </nav>
       </header>

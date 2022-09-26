@@ -8,7 +8,8 @@ body {
   font-family: "lato", "arial";
 }
 
-button {
+button,
+.link {
   display: inline-block;
   padding: 0.5em;
   margin: 0.5em;
@@ -23,8 +24,10 @@ button {
   position: relative;
   overflow: hidden;
   z-index: 1;
+  text-decoration: none;
 }
-button:after {
+button:after,
+.link:after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -34,7 +37,8 @@ button:after {
   border-radius: 50vw;
   z-index: -2;
 }
-button:before {
+button:before,
+.link:before {
   content: "";
   position: absolute;
   bottom: 0;
@@ -46,10 +50,12 @@ button:before {
   border-radius: 10rem;
   z-index: -1;
 }
-button:hover {
+button:hover,
+.link:hover {
   color: #e9fdfc;
 }
-button:hover:before {
+button:hover:before,
+.link:hover:before {
   width: 100%;
 }
 

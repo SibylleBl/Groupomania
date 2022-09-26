@@ -2,7 +2,7 @@
   <form method="post">
     <div>
       <label for="imageUrl">Image:</label>
-      <input id="imageUrl" />
+      <input id="imageUrl" type="file" />
     </div>
     <div>
       <label for="title">Titre:</label>
