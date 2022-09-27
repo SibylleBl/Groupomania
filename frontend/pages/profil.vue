@@ -26,10 +26,11 @@ export default {
     };
   },
 
-  methods: {
-    async fetch() {
-      this.user = await this.$axios.$get("http://localhost:3001/api/auth/me");
-    },
+  async fetch() {
+    this.user = await this.$axios.$get("http://localhost:3001/api/auth/me");
+    console.log(this.user);
   },
+
+  methods: {},
 };
 </script>

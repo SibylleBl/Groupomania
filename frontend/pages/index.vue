@@ -74,10 +74,11 @@ export default {
       "http://localhost:3001/api/publications/"
     );
     this.users = await this.$axios.$get("http://localhost:3001/api/auth/");
-    console.log(
-      "🚀 ~ file: index.vue ~ line 77 ~ fetch ~  this.users",
-      this.users
-    );
+    // console.log(
+    //   "🚀 ~ file: index.vue ~ line 77 ~ fetch ~  this.users",
+    //   this.users
+    // );
+    console.log($auth.$state.user.name);
   },
 
   methods: {

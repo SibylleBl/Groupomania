@@ -48,6 +48,8 @@ exports.login = (req, res) => {
             } else {
               res.status(200).json({
                 userId: user._id,
+                name: user.name,
+                email: user.email,
                 token: jsonWebToken.sign(
                   { userId: user._id },
                   process.env.SECRET_TOKEN,
@@ -73,8 +75,12 @@ exports.getOneUser = (req, res) => {
 };
 
 exports.getMe = (req, res) => {
+  console.log(req.auth.userId);
   User.findOne({ id: req.auth.userId })
-    .then((user) => res.status(200).json({ user: user }))
+    .then((user) => {
+      // console.log(user);
+      res.status(200).json({ user: user });
+    })
     .catch((error) => res.status(404).json({ error }));
 };
 

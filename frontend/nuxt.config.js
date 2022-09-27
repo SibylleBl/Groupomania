@@ -44,6 +44,7 @@ export default {
         },
         user: {
           property: "user",
+
           // autoFetch: true
         },
         endpoints: {

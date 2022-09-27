@@ -18,8 +18,6 @@
 </template>
 
 <script>
-// import axios from "axios";
-
 export default {
   data() {
     return {
@@ -31,12 +29,14 @@ export default {
   },
   methods: {
     async userLogin() {
+      console.log(this.login);
       try {
         await this.$auth.loginWith("local", {
           data: this.login,
         });
+
         this.$router.push("/");
-        console.log(this.$auth.$state);
+        // enr dans local storage
       } catch (err) {
         console.log(err);
       }
