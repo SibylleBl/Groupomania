@@ -9,7 +9,7 @@
         <div class="user_pub">
           <!-- ici le nom de la personne qui à créé la pub et sa photo -->
           <p>photo</p>
-          <h2>Name</h2>
+          <h2>{{ publication.userId }}</h2>
         </div>
 
         <post
@@ -28,9 +28,6 @@
         <div class="like_dislike">
           <button class="like" @click="likePost(publication._id)">
             <font-awesome-icon icon="fa-solid fa-thumbs-up" />
-          </button>
-          <button class="dislike" @click="dislikePost(publication._id)">
-            <font-awesome-icon icon="fa-solid fa-thumbs-down" />
           </button>
         </div>
       </div>
@@ -78,20 +75,26 @@ export default {
     //   "🚀 ~ file: index.vue ~ line 77 ~ fetch ~  this.users",
     //   this.users
     // );
-    console.log($auth.$state.user.name);
+    // console.log($auth.$state.user.name);
   },
 
   methods: {
-    deletePost(value) {
-      console.log(value);
-      this.$axios.$delete("http://localhost:3001/api/publications/" + value);
-
-      // supprimer publication dans le tableau publications:
-
-      for (let i = 0; i < this.publications.length; i++) {
-        if (this.publications[i]._id === value) {
-          this.publications.splice(i, 1);
-        }
+    async deletePost(value) {
+      // console.log(value);
+      try {
+        const succes = await this.$axios.$delete(
+          "http://localhost:3001/api/publications/" + value
+        );
+        console.log(
+          "🚀 ~ file: index.vue ~ line 87 ~ deletePost ~ succes",
+          succes
+        );
+        // supprimer publication dans le tableau publications:
+        this.publications = this.publications.filter(
+          (publication) => value !== publication._id
+        );
+      } catch ({ response }) {
+        console.log(response);
       }
     },
 
@@ -99,13 +102,6 @@ export default {
       this.$axios.$post(
         `"http://localhost:3001/api/publications/${value}/like"`
       );
-    },
-
-    dislikePost(value) {
-      this.$axios.$post(
-        `"http://localhost:3001/api/publications/${value}/like"`
-      );
-      console.log(value);
     },
   },
 };

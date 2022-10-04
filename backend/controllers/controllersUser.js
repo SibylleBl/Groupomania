@@ -10,6 +10,7 @@ exports.signup = (req, res) => {
       const newUser = new User({
         name: req.body.name,
         email: req.body.email,
+
         imageUrl: `${req.protocol}://${req.get("host")}/images/${
           req.file.filename
         }`,
@@ -50,8 +51,9 @@ exports.login = (req, res) => {
                 userId: user._id,
                 name: user.name,
                 email: user.email,
+                isAdmin: user.isAdmin,
                 token: jsonWebToken.sign(
-                  { userId: user._id },
+                  { userId: user._id, isAdmin: user.isAdmin },
                   process.env.SECRET_TOKEN,
                   { expiresIn: "24h" }
                 ),
@@ -69,14 +71,14 @@ exports.login = (req, res) => {
 };
 
 exports.getOneUser = (req, res) => {
-  User.findOne({ id: req.body.userId }) // à corriger
+  User.findOne({ _id: req.body.userId }) // à corriger
     .then((user) => res.status(200).json(user))
     .catch((error) => res.status(404).json({ error }));
 };
 
 exports.getMe = (req, res) => {
-  console.log(req.auth.userId);
-  User.findOne({ id: req.auth.userId })
+  // console.log(req.auth.userId);
+  User.findOne({ _id: req.auth.userId })
     .then((user) => {
       // console.log(user);
       res.status(200).json({ user: user });

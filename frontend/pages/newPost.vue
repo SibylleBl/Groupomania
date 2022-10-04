@@ -80,6 +80,8 @@ export default {
           res.data.files;
           res.status;
         });
+
+      this.$router.push("/");
     },
   },
 };

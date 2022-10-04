@@ -30,8 +30,8 @@ export default {
   },
 
   methods: {
-    modifyPost() {
-      this.$axios.$put(
+    async modifyPost() {
+      await this.$axios.$put(
         "http://localhost:3001/api/publications/" + this.$route.params.id,
         {
           title: this.modify.title,

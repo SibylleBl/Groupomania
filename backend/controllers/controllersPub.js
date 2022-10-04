@@ -16,8 +16,6 @@ exports.createPublication = (req, res) => {
       req.file.filename
     }`, // à corriger car image "undefined"
     likes: 0,
-    dislikes: 0,
-    usersDisliked: [],
     usersLiked: [],
   });
 
@@ -74,8 +72,22 @@ exports.modifyPublication = (req, res) => {
 
 exports.deletePublication = (req, res) => {
   Publications.findOne({ _id: req.params.id })
+
     .then((publication) => {
-      if (publication.userId != req.auth.userId) {
+      console.log(
+        "🚀 ~ file: controllersPub.js ~ line 77 ~ .then ~ publication.userId",
+        publication.userId
+      );
+      console.log(
+        "🚀 ~ file: controllersPub.js ~ line 82 ~ .then ~ req.auth.userId",
+        req.auth.userId
+      );
+
+      console.log(
+        "🚀 ~ file: controllersPub.js ~ line 86 ~ .then ~ req.auth.isAdmin",
+        req.auth.isAdmin
+      );
+      if (publication.userId != req.auth.userId && !req.auth.isAdmin) {
         res.status(401).json({ message: "Non-autorisé" });
       } else {
         const filename = publication.imageUrl.split("/images")[1];
@@ -110,15 +122,19 @@ exports.getOnePublication = (req, res) => {
 
 exports.getAllPublications = (req, res) => {
   Publications.find()
-    .then((allPub) => res.status(200).json(allPub))
+
+    .then((allPub) => {
+      //récupérer le name du créateur de chaque publication
+      res.status(200).json(allPub);
+    })
     .catch((error) => res.status(400).json({ error }));
 };
 
-exports.getAllPublicationsdev = (req, res) => {
-  Publications.find()
-    .then((allPub) => res.status(200).json(allPub))
-    .catch((error) => res.status(400).json({ error }));
-};
+// exports.getAllPublicationsdev = (req, res) => {
+//   Publications.find()
+//     .then((allPub) => res.status(200).json(allPub))
+//     .catch((error) => res.status(400).json({ error }));
+// };
 
 // -------- GESTION DES LIKES ET DISLIKES:
 

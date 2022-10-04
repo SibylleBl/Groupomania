@@ -13,6 +13,7 @@
             <button type="submit" @click="logout">
               <font-awesome-icon icon="fa-solid fa-right-from-bracket" /> Se
               déconnecter
+              <p>{{ $auth.$state.user._id }}</p>
             </button>
           </div>
           <div class="nav_bar" v-else>
