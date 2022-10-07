@@ -1,21 +1,24 @@
 <template>
-  <form method="post">
+  <form method="put">
     <div>
       <label for="name">Nom:</label>
-      <input id="name" />
+      <input id="name" v-model="modify.name" ref="name" @change="uploadName" />
     </div>
     <div>
       <label for="email">Adresse mail:</label>
-      <input id="email" />
+      <input
+        id="email"
+        v-model="modify.email"
+        ref="email"
+        @change="uploadEmail"
+      />
     </div>
     <div>
       <label for="imageUrl">Photo de profil:</label>
-      <input id="imageUrl" type="file" />
+      <input id="imageUrl" type="file" ref="file" @change="uploadImg" />
     </div>
 
-    <NuxtLink to="./modifyPassword"> Changer mon mot de passe </NuxtLink>
-
-    <button>Enregistrer</button>
+    <button type="submit" @click="modifyUser()">Enregistrer</button>
   </form>
 </template>
 
@@ -34,31 +37,27 @@ export default {
   methods: {
     uploadImg() {
       this.imageUrl = this.$refs.file.files[0];
-      console.log(
-        "🚀 ~ file: newPost.vue ~ line 40 ~ uploadImg ~  this.imageUrl",
-        this.imageUrl
-      );
     },
 
-    uploadTitle() {
-      this.title = this.$refs.title.value;
+    uploadName() {
+      this.name = this.$refs.name.value;
     },
 
-    uploadMessage() {
-      this.message = this.$refs.message.value;
+    uploadEmail() {
+      this.email = this.$refs.email.value;
     },
 
-    createPost() {
+    modifyUser() {
       const headers = {
         "Content-Type": "multipart/form-data",
       };
       const formData = new FormData();
       formData.append("image", this.imageUrl);
-      formData.append("title", this.title);
-      formData.append("message", this.message);
+      formData.append("name", this.name);
+      formData.append("email", this.email);
 
       this.$axios
-        .$post("http://localhost:3001/api/publications/", formData, {
+        .$put("http://localhost:3001/api/auth/modifyUser", formData, {
           headers,
         })
         .then((res) => {
@@ -66,7 +65,7 @@ export default {
           res.status;
         });
 
-      this.$router.push("/");
+      // this.$router.push("/");
     },
   },
 };
