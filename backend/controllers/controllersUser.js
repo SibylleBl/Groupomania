@@ -10,7 +10,6 @@ exports.signup = (req, res) => {
       const newUser = new User({
         name: req.body.name,
         email: req.body.email,
-
         imageUrl: `${req.protocol}://${req.get("host")}/images/${
           req.file.filename
         }`,
@@ -53,7 +52,7 @@ exports.login = (req, res) => {
                 email: user.email,
                 isAdmin: user.isAdmin,
                 token: jsonWebToken.sign(
-                  { userId: user._id, isAdmin: user.isAdmin },
+                  { userId: user._id, isAdmin: user.isAdmin, name: user.name },
                   process.env.SECRET_TOKEN,
                   { expiresIn: "24h" }
                 ),
@@ -67,6 +66,34 @@ exports.login = (req, res) => {
     })
     .catch((error) => {
       res.status(500).json({ error });
+    });
+};
+
+exports.modifyUser = (req, res) => {
+  const userObject = req.file
+    ? {
+        ...JSON.parse(req.body.user),
+        imageUrl: `${req.protocol}://${req.get("host")}/images/${
+          req.file.filename
+        }`,
+      }
+    : { ...req.body };
+
+  delete userObject._userId;
+
+  User.findOne({ _id: req.body.userId })
+
+    .then(() => {
+      User.updateOne(
+        { id: req.params.id },
+        { ...userObject, id: req.params.id }
+      )
+        .then(() => res.status(200).json({ message: "Profil mis à jour!" }))
+        .catch((error) => res.status(401).json({ error }));
+    })
+
+    .catch((error) => {
+      res.status(400).json({ error });
     });
 };
 

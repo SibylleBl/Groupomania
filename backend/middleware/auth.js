@@ -10,16 +10,19 @@ module.exports = (req, res, next) => {
     // next();
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jsonWebToken.verify(token, process.env.SECRET_TOKEN);
-    console.log("🚀 ~ file: auth.js ~ line 13 ~ decodedToken", decodedToken);
+    // console.log("🚀 ~ file: auth.js ~ line 13 ~ decodedToken", decodedToken);
     const userId = decodedToken.userId;
     const isAdmin = decodedToken.isAdmin;
-    console.log("🚀 ~ file: auth.js ~ line 15 ~ admin", isAdmin);
+    const name = decodedToken.name;
+    console.log("🚀 ~ file: auth.js ~ line 17 ~ name", name);
+    // console.log("🚀 ~ file: auth.js ~ line 15 ~ admin", isAdmin);
 
-    console.log("🚀 ~ file: auth.js ~ line 13 ~ userId", userId);
+    // console.log("🚀 ~ file: auth.js ~ line 13 ~ userId", userId);
 
     req.auth = {
       userId: userId,
       isAdmin: isAdmin,
+      name: name,
     };
 
     if (req.body.userId && req.body.userId !== userId && !isAdmin) {

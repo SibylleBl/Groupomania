@@ -102,6 +102,9 @@ header .nav_bar {
   background-color: #9ec8db;
   color: #3f6182;
 }
+.index .posts .post .user_pub .p {
+  width: 100px;
+}
 .index .posts .post .pub {
   display: flex;
   flex-direction: column;

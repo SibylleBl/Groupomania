@@ -2,16 +2,14 @@ const mongoose = require("mongoose");
 
 const publicationsSchema = mongoose.Schema(
   {
-    commentId: [String],
     userId: { type: String, required: true },
+    username: { type: String },
     title: { type: String, required: true },
     message: { type: String, required: true },
     imageUrl: { type: String },
-    videoUrl: { type: String },
     likes: { type: Number, default: 0 },
-    dislikes: { type: Number, default: 0 },
     usersLiked: [String],
-    usersDisliked: [String],
+    createdAt: { type: Number },
   },
   {
     timestamps: true,

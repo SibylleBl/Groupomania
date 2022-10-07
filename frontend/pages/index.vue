@@ -9,7 +9,7 @@
         <div class="user_pub">
           <!-- ici le nom de la personne qui à créé la pub et sa photo -->
           <p>photo</p>
-          <h2>{{ publication.userId }}</h2>
+          <h2>{{ publication.username }}</h2>
         </div>
 
         <post
@@ -98,10 +98,14 @@ export default {
       }
     },
 
-    likePost(value) {
-      this.$axios.$post(
-        `"http://localhost:3001/api/publications/${value}/like"`
-      );
+    async likePost(value) {
+      try {
+        await this.$axios.$post(
+          `http://localhost:3001/api/publications/${value}/like/`
+        );
+      } catch ({ response }) {
+        console.log(response);
+      }
     },
   },
 };
