@@ -22,7 +22,6 @@
         @change="uploadMessage"
       />
     </div>
-
     <button type="submit" @click="modifyPost()">Enregistrer</button>
   </form>
 </template>
@@ -70,7 +69,7 @@ export default {
           res.data.files;
           res.status;
         });
-      // this.$router.push("/");
+      this.$router.push("/");
     },
   },
 };

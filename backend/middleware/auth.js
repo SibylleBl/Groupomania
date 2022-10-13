@@ -14,6 +14,7 @@ module.exports = (req, res, next) => {
     const userId = decodedToken.userId;
     const isAdmin = decodedToken.isAdmin;
     const name = decodedToken.name;
+
     // console.log("🚀 ~ file: auth.js ~ line 17 ~ name", name);
     // console.log("🚀 ~ file: auth.js ~ line 15 ~ admin", isAdmin);
 

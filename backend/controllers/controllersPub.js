@@ -1,6 +1,7 @@
 const Publications = require("../models/publications");
 const fs = require("fs");
 const { error } = require("console");
+const user = require("../models/user");
 const date = new Date("<YYYY-mm-ddTHH:MM:ss>");
 
 // -------- CREATION D'UNE NOUVELLE PUBLICATION:
@@ -36,28 +37,40 @@ exports.createPublication = (req, res) => {
 // -------- MODIFICATION D'UNE PUBLICATION:
 
 exports.modifyPublication = (req, res) => {
+  // console.log("🚀 ~ file: controllersPub.js ~ line 39 ~ res", res);
+  // console.log("🚀 ~ file: controllersPub.js ~ line 39 ~ req", req);
+  // console.log(req.file);
   const pubObject = req.file
     ? {
-        ...JSON.parse(req.body.publication),
+        ...req.body,
         imageUrl: `${req.protocol}://${req.get("host")}/images/${
           req.file.filename
         }`,
       }
     : { ...req.body };
-  console.log(pubObject);
+  // console.log(pubObject);
 
   delete pubObject._userId;
 
-  Publications.findOne({ id: req.params.id })
+  Publications.findOne({ _id: req.params.id })
 
     .then((publication) => {
+      // console.log(
+      //   "🚀 ~ file: controllersPub.js ~ line 57 ~ .then ~ publication",
+      //   publication
+      // );
+      // console.log(
+      //   "🚀 ~ file: controllersPub.js ~ line 60 ~ .then ~ req.auth.userId",
+      //   req.auth.userId
+      // );
+
       if (publication.userId !== req.auth.userId) {
         // console.log(publication.userId);
         // console.log(req.auth.userId);
         res.status(401).json({ message: "Non-autorisé" });
       } else {
         Publications.updateOne(
-          { id: req.params.id },
+          { _id: req.params.id },
           {
             ...pubObject,
             id: req.params.id,
@@ -82,19 +95,6 @@ exports.deletePublication = (req, res) => {
   Publications.findOne({ _id: req.params.id })
 
     .then((publication) => {
-      // console.log(
-      //   "🚀 ~ file: controllersPub.js ~ line 77 ~ .then ~ publication.userId",
-      //   publication.userId
-      // );
-      // console.log(
-      //   "🚀 ~ file: controllersPub.js ~ line 82 ~ .then ~ req.auth.userId",
-      //   req.auth.userId
-      // );
-
-      // console.log(
-      //   "🚀 ~ file: controllersPub.js ~ line 86 ~ .then ~ req.auth.isAdmin",
-      //   req.auth.isAdmin
-      // );
       if (publication.userId != req.auth.userId && !req.auth.isAdmin) {
         res.status(401).json({ message: "Non-autorisé" });
       } else {
@@ -117,7 +117,7 @@ exports.deletePublication = (req, res) => {
 // -------- JE RECUPERE UNE PUBLICATION SPECIFIQUE:
 
 exports.getOnePublication = (req, res) => {
-  Publications.findOne({ id: req.params.id })
+  Publications.findOne({ _id: req.params.id })
     .then((publication) => {
       res.status(200).json(publication);
     })
@@ -130,51 +130,42 @@ exports.getOnePublication = (req, res) => {
 
 exports.getAllPublications = (req, res) => {
   Publications.find()
-    .sort({ createdAt: 1 })
+    .sort({ createdAt: -1 })
 
     .then((allPub) => {
       //récupérer le name du créateur de chaque publication
-      // console.log(allPub);
-      console.log(req.auth);
-      // console.log(req.auth.name);
+
       res.status(200).json(allPub);
     })
     .catch((error) => res.status(400).json({ error }));
 };
 
-// -------- GESTION DES LIKES ET DISLIKES:
+// -------- GESTION DES LIKES:
 
 exports.likePublication = (req, res) => {
   Publications.findOne({ _id: req.params.id })
+
     .then((publication) => {
-      switch (req.body.like) {
-        case 1:
-          if (!publication.usersLiked.includes(req.body.userId)) {
-            publication.usersLiked.push(req.body.userId);
-            publication.likes++;
-          }
-          break;
-
-        case 0:
-          if (publication.usersLiked.includes(req.body.userId)) {
-            publication.usersLiked.splice(
-              publication.usersLiked.indexOf(req.body.userId),
-              1
-            );
-            publication.likes--;
-          }
-
-          break;
-
-        default:
-          break;
+      if (!publication.usersLiked.includes(req.auth.userId)) {
+        publication.usersLiked.push(req.auth.userId);
+        publication.likes++;
+      } else if (publication.usersLiked.includes(req.auth.userId)) {
+        publication.usersLiked = publication.usersLiked.filter((monlike) => {
+          publication.usersLiked !== monlike;
+        });
+        publication.likes--;
       }
-      publication
-        .save()
+      Publications.updateOne(
+        { _id: req.params.id },
+        { likes: publication.likes, usersLiked: publication.usersLiked }
+      )
+
         .then(() => {
           res.status(200).json({ message: "Tableau mis à jour" });
         })
-        .catch((error) => res.status(400).json({ error }));
+        .catch((error) => {
+          res.status(400).json({ error });
+        });
     })
     .catch((error) => {
       res.status(404).json({ error });

@@ -9,7 +9,7 @@ const publicationsSchema = mongoose.Schema(
     imageUrl: { type: String },
     likes: { type: Number, default: 0 },
     usersLiked: [String],
-    createdAt: { type: Number },
+    createdAt: { type: String },
   },
   {
     timestamps: true,

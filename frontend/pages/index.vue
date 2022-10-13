@@ -6,30 +6,27 @@
         :key="publication.title"
         class="post"
       >
-        <div class="user_pub">
-          <!-- ici le nom de la personne qui à créé la pub et sa photo -->
-          <p>photo</p>
-          <h2>{{ publication.username }}</h2>
-        </div>
-
         <post
+          :username="publication.username"
           :title="publication.title"
           :message="publication.message"
           :imageUrl="publication.imageUrl"
           :_id="publication._id"
+          :likes="publication.likes"
           class="pub"
+          @delete-my-post="deletePost(publication._id)"
+          @like-my-post="
+            likePost(
+              publication.usersLiked,
+              publication.likes,
+              $auth.$state.user._id
+            )
+          "
         />
-        <button @click="deletePost(publication._id)">
-          <font-awesome-icon icon="fa-solid fa-trash" />
-        </button>
+
         <NuxtLink class="link" :to="`/modifyPublication/${publication._id}`">
           <font-awesome-icon icon="fa-solid fa-pen" />
         </NuxtLink>
-        <div class="like_dislike">
-          <button class="like" @click="likePost(publication._id)">
-            <font-awesome-icon icon="fa-solid fa-thumbs-up" />
-          </button>
-        </div>
       </div>
     </div>
 
@@ -61,8 +58,8 @@ export default {
     return {
       publications: [],
       users: [],
+
       likes: Number,
-      dislikes: Number,
     };
   },
 
@@ -71,40 +68,20 @@ export default {
       "http://localhost:3001/api/publications/"
     );
     this.users = await this.$axios.$get("http://localhost:3001/api/auth/");
-    // console.log(
-    //   "🚀 ~ file: index.vue ~ line 77 ~ fetch ~  this.users",
-    //   this.users
-    // );
-    // console.log($auth.$state.user.name);
   },
 
   methods: {
-    async deletePost(value) {
-      // console.log(value);
-      try {
-        const succes = await this.$axios.$delete(
-          "http://localhost:3001/api/publications/" + value
-        );
-        console.log(
-          "🚀 ~ file: index.vue ~ line 87 ~ deletePost ~ succes",
-          succes
-        );
-        // supprimer publication dans le tableau publications:
-        this.publications = this.publications.filter(
-          (publication) => value !== publication._id
-        );
-      } catch ({ response }) {
-        console.log(response);
-      }
+    deletePost(value) {
+      this.publications = this.publications.filter(
+        (publication) => value !== publication._id
+      );
     },
 
-    async likePost(value) {
-      try {
-        await this.$axios.$post(
-          `http://localhost:3001/api/publications/${value}/like/`
-        );
-      } catch ({ response }) {
-        console.log(response);
+    likePost(array, counter, userId) {
+      console.log(array, counter, userId);
+      if (array.includes(userId)) {
+        array.push(userId);
+        counter + 1;
       }
     },
   },

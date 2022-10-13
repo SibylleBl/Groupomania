@@ -29,9 +29,6 @@
       </header>
 
       <Nuxt />
-      <footer>
-        <h2>Mon footer</h2>
-      </footer>
     </div>
   </div>
 </template>
