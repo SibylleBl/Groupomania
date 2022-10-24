@@ -15,6 +15,7 @@ exports.createPublication = (req, res) => {
     ...pubObject,
     userId: req.auth.userId,
     username: req.auth.name,
+    userImg: req.auth.imageUrl,
     imageUrl: `${req.protocol}://${req.get("host")}/images/${
       req.file.filename
     }`,
@@ -130,11 +131,9 @@ exports.getOnePublication = (req, res) => {
 
 exports.getAllPublications = (req, res) => {
   Publications.find()
-    .sort({ createdAt: -1 })
+    .sort({ createdAt: 1 })
 
     .then((allPub) => {
-      //récupérer le name du créateur de chaque publication
-
       res.status(200).json(allPub);
     })
     .catch((error) => res.status(400).json({ error }));
@@ -155,13 +154,17 @@ exports.likePublication = (req, res) => {
         });
         publication.likes--;
       }
-      Publications.updateOne(
+      Publications.findOneAndUpdate(
         { _id: req.params.id },
         { likes: publication.likes, usersLiked: publication.usersLiked }
       )
 
-        .then(() => {
-          res.status(200).json({ message: "Tableau mis à jour" });
+        .then((newPublication) => {
+          console.log(
+            "🚀 ~ file: controllersPub.js ~ line 165 ~ .then ~ newPublication",
+            newPublication
+          );
+          res.status(200).json(newPublication);
         })
         .catch((error) => {
           res.status(400).json({ error });

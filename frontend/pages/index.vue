@@ -15,18 +15,8 @@
           :likes="publication.likes"
           class="pub"
           @delete-my-post="deletePost(publication._id)"
-          @like-my-post="
-            likePost(
-              publication.usersLiked,
-              publication.likes,
-              $auth.$state.user._id
-            )
-          "
+          @update-post="updatePost"
         />
-
-        <NuxtLink class="link" :to="`/modifyPublication/${publication._id}`">
-          <font-awesome-icon icon="fa-solid fa-pen" />
-        </NuxtLink>
       </div>
     </div>
 
@@ -77,12 +67,8 @@ export default {
       );
     },
 
-    likePost(array, counter, userId) {
-      console.log(array, counter, userId);
-      if (array.includes(userId)) {
-        array.push(userId);
-        counter + 1;
-      }
+    updatePost(post) {
+      this.publications = this.publications.map((publication) => post);
     },
   },
 };

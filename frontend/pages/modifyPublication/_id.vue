@@ -52,7 +52,7 @@ export default {
       const headers = {
         "Content-Type": "multipart/form-data",
       };
-      // console.log("ici" + this.$route.params.id);
+      console.log("ici" + this.$route.params.id);
       const formData = new FormData();
       formData.append("image", this.imageUrl);
       formData.append("title", this.title);
@@ -66,8 +66,9 @@ export default {
           }
         )
         .then((res) => {
-          res.data.files;
-          res.status;
+          console.log(res);
+          // data.files;
+          // res.status;
         });
       this.$router.push("/");
     },

@@ -24,7 +24,7 @@
 export default {
   data() {
     return {
-      name: "Sibylle",
+      // name: "Sibylle",
       publications: [],
       user: [],
     };

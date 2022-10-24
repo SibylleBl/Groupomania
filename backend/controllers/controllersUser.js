@@ -72,7 +72,7 @@ exports.login = (req, res) => {
 exports.modifyUser = (req, res) => {
   const userObject = req.file
     ? {
-        ...JSON.parse(req.body.user),
+        ...req.body.user,
         imageUrl: `${req.protocol}://${req.get("host")}/images/${
           req.file.filename
         }`,
