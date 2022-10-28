@@ -38,9 +38,6 @@ exports.createPublication = (req, res) => {
 // -------- MODIFICATION D'UNE PUBLICATION:
 
 exports.modifyPublication = (req, res) => {
-  // console.log("🚀 ~ file: controllersPub.js ~ line 39 ~ res", res);
-  // console.log("🚀 ~ file: controllersPub.js ~ line 39 ~ req", req);
-  // console.log(req.file);
   const pubObject = req.file
     ? {
         ...req.body,
@@ -49,25 +46,13 @@ exports.modifyPublication = (req, res) => {
         }`,
       }
     : { ...req.body };
-  // console.log(pubObject);
 
   delete pubObject._userId;
 
   Publications.findOne({ _id: req.params.id })
 
     .then((publication) => {
-      // console.log(
-      //   "🚀 ~ file: controllersPub.js ~ line 57 ~ .then ~ publication",
-      //   publication
-      // );
-      // console.log(
-      //   "🚀 ~ file: controllersPub.js ~ line 60 ~ .then ~ req.auth.userId",
-      //   req.auth.userId
-      // );
-
-      if (publication.userId !== req.auth.userId) {
-        // console.log(publication.userId);
-        // console.log(req.auth.userId);
+      if (publication.userId !== req.auth.userId && !req.auth.isAdmin) {
         res.status(401).json({ message: "Non-autorisé" });
       } else {
         Publications.updateOne(
@@ -78,9 +63,13 @@ exports.modifyPublication = (req, res) => {
           }
         )
 
-          .then(() =>
-            res.status(200).json({ message: "Publication modifiée !" })
-          )
+          .then((newPublication) => {
+            console.log(
+              "🚀 ~ file: controllersPub.js ~ line 67 ~ .then ~ newPublication",
+              newPublication
+            );
+            return res.status(200).json(newPublication);
+          })
           .catch((error) => res.status(401).json({ error }));
       }
     })
@@ -160,10 +149,10 @@ exports.likePublication = (req, res) => {
       )
 
         .then((newPublication) => {
-          console.log(
-            "🚀 ~ file: controllersPub.js ~ line 165 ~ .then ~ newPublication",
-            newPublication
-          );
+          // console.log(
+          //   "🚀 ~ file: controllersPub.js ~ line 165 ~ .then ~ newPublication",
+          //   newPublication
+          // );
           res.status(200).json(newPublication);
         })
         .catch((error) => {

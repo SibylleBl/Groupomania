@@ -68,7 +68,18 @@ export default {
     },
 
     updatePost(post) {
-      this.publications = this.publications.map((publication) => post);
+      console.log(this.publications);
+      console.log(post);
+      const userId = this.$auth.$state.user._id;
+      console.log(
+        "🚀 ~ file: index.vue ~ line 74 ~ updatePost ~ userId",
+        userId
+      );
+      this.publications = this.publications.map((publication) => {
+        if (!post.usersLiked.includes(userId)) {
+          return post.likes + 1;
+        }
+      });
     },
   },
 };

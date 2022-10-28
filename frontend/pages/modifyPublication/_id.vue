@@ -13,9 +13,10 @@
         @change="uploadTitle"
       />
     </div>
+
     <div>
       <label for="message">Message:</label>
-      <input
+      <textarea
         id="message"
         v-model="modify.message"
         ref="message"
@@ -32,13 +33,24 @@ export default {
     return {
       modify: {
         imageUrl: null,
-        message: "",
-        title: "",
+        message: "Mon message",
+        title: "Mon titre",
       },
     };
   },
 
   methods: {
+    async fetch() {
+      try {
+        const modify = await this.$axios.$get(
+          `http://localhost:3001/api/publications/${this._id}`
+        );
+        return modify;
+      } catch ({ res }) {
+        console.log(res);
+      }
+    },
+
     uploadImg() {
       this.imageUrl = this.$refs.file.files[0];
     },
@@ -52,7 +64,7 @@ export default {
       const headers = {
         "Content-Type": "multipart/form-data",
       };
-      console.log("ici" + this.$route.params.id);
+
       const formData = new FormData();
       formData.append("image", this.imageUrl);
       formData.append("title", this.title);
@@ -67,8 +79,6 @@ export default {
         )
         .then((res) => {
           console.log(res);
-          // data.files;
-          // res.status;
         });
       this.$router.push("/");
     },

@@ -52,7 +52,7 @@ export default {
         const post = await this.$axios.$post(
           `http://localhost:3001/api/publications/${this._id}/like/`
         );
-        console.log("🚀 ~ file: post.vue ~ line 51 ~ likePost ~ post", post);
+        // console.log("🚀 ~ file: post.vue ~ line 51 ~ likePost ~ post", post);
         this.$emit("update-post", post);
       } catch ({ response }) {
         console.log(response);
