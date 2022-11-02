@@ -61,9 +61,9 @@ export default {
   },
 
   methods: {
-    deletePost(value) {
+    deletePost(id) {
       this.publications = this.publications.filter(
-        (publication) => value !== publication._id
+        (publication) => id !== publication._id
       );
     },
 
@@ -75,10 +75,13 @@ export default {
         "🚀 ~ file: index.vue ~ line 74 ~ updatePost ~ userId",
         userId
       );
+
       this.publications = this.publications.map((publication) => {
-        if (!post.usersLiked.includes(userId)) {
-          return post.likes + 1;
-        }
+        console.log(
+          "🚀 ~ file: index.vue ~ line 81 ~ this.publications=this.publications.map ~ publication",
+          publication
+        );
+        return publication;
       });
     },
   },
