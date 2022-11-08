@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const publicationsSchema = mongoose.Schema(
   {
+    userImg: { type: String },
     userId: { type: String, required: true },
     username: { type: String },
     title: { type: String, required: true },

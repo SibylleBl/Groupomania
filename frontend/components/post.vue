@@ -7,19 +7,20 @@
     <img :src="`${imageUrl}`" />
     <p>{{ message }}</p>
 
-    <button type="submit" @click="$emit('delete-my-post', deletePost(_id))">
-      <font-awesome-icon icon="fa-solid fa-trash" />
-    </button>
-    <div class="like_dislike">
-      <button class="like" type="submit" @click="likePost">
-        <font-awesome-icon icon="fa-solid fa-thumbs-up" />
+    <div class="buttons">
+      <button type="submit" @click="$emit('delete-my-post', deletePost(_id))">
+        <font-awesome-icon icon="fa-solid fa-trash" />
       </button>
-      <div class="counterLike">{{ likes }}</div>
+      <div class="like_dislike">
+        <button type="submit" @click="likePost">
+          <font-awesome-icon icon="fa-solid fa-thumbs-up" />
+        </button>
+        <div class="counterLike">{{ likes }}</div>
+      </div>
+      <NuxtLink class="link" :to="`/modifyPublication/${_id}`">
+        <font-awesome-icon icon="fa-solid fa-pen" />
+      </NuxtLink>
     </div>
-
-    <NuxtLink class="link" :to="`/modifyPublication/${_id}`">
-      <font-awesome-icon icon="fa-solid fa-pen" />
-    </NuxtLink>
   </div>
 </template>
 
@@ -52,7 +53,8 @@ export default {
         const post = await this.$axios.$post(
           `http://localhost:3001/api/publications/${this._id}/like/`
         );
-        // console.log("🚀 ~ file: post.vue ~ line 51 ~ likePost ~ post", post);
+        console.log("🚀 ~ file: post.vue ~ line 51 ~ likePost ~ post", post);
+
         this.$emit("update-post", post);
       } catch ({ response }) {
         console.log(response);

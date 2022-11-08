@@ -35,6 +35,7 @@
 
 <script>
 export default {
+  props: ["mode"],
   data() {
     return {
       data: {
@@ -47,10 +48,10 @@ export default {
 
   async fetch() {
     try {
-      const myPost = await this.$axios.$get(
+      const data = await this.$axios.$get(
         `http://localhost:3001/api/publications/${this.$route.params.id}`
       );
-      this.myPost = { ...myPost };
+      this.data = { ...data };
     } catch ({ res }) {
       console.log(res);
     }
@@ -75,21 +76,21 @@ export default {
       formData.append("image", this.imageUrl);
       formData.append("title", this.title);
       formData.append("message", this.message);
-      await this.$axios
-        .$put(
-          "http://localhost:3001/api/publications/" + this.$route.params.id,
-          formData,
-          {
-            headers,
-          }
-        )
-        .then((res) => {
-          console.log(res);
-        });
+      const res = await this.$axios.$put(
+        "http://localhost:3001/api/publications/" + this.$route.params.id,
+        formData,
+        {
+          headers,
+        }
+      );
+      console.log(
+        "🚀 ~ file: createAndModifyPost.vue ~ line 86 ~ modifyPost ~ res",
+        res
+      );
       this.$router.push("/");
     },
 
-    createPost() {
+    async createPost() {
       const headers = {
         "Content-Type": "multipart/form-data",
       };
@@ -98,16 +99,13 @@ export default {
       formData.append("title", this.title);
       formData.append("message", this.message);
 
-      this.$axios
+      await this.$axios
         .$post("http://localhost:3001/api/publications/", formData, {
           headers,
         })
         .then((res) => {
-          res.data.files;
-          res.status;
+          this.$router.push("/");
         });
-
-      this.$router.push("/");
     },
   },
 };

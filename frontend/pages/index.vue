@@ -3,10 +3,11 @@
     <div v-if="publications.length > 0" class="posts">
       <div
         v-for="publication in publications"
-        :key="publication.title"
+        :key="publication._id"
         class="post"
       >
         <post
+          :userImg="publication.userImg"
           :username="publication.username"
           :title="publication.title"
           :message="publication.message"
@@ -33,7 +34,11 @@
 
         <div class="users">
           <div v-for="user in users" :key="user.name" class="user">
-            <userList :name="user.name"></userList>
+            <userList
+              :name="user.name"
+              :email="user.email"
+              :imageUrl="user.imageUrl"
+            ></userList>
           </div>
         </div>
       </div>
@@ -68,19 +73,10 @@ export default {
     },
 
     updatePost(post) {
-      console.log(this.publications);
-      console.log(post);
-      const userId = this.$auth.$state.user._id;
-      console.log(
-        "🚀 ~ file: index.vue ~ line 74 ~ updatePost ~ userId",
-        userId
-      );
-
       this.publications = this.publications.map((publication) => {
-        console.log(
-          "🚀 ~ file: index.vue ~ line 81 ~ this.publications=this.publications.map ~ publication",
-          publication
-        );
+        if (publication._id === post._id) {
+          return post;
+        }
         return publication;
       });
     },

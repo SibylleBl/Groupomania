@@ -46,6 +46,10 @@ header {
     @include posts;
   }
 
+  .user-card {
+    @include user-card;
+  }
+
   .column {
     display: flex;
     flex-direction: column;

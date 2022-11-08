@@ -145,14 +145,18 @@ exports.likePublication = (req, res) => {
       }
       Publications.findOneAndUpdate(
         { _id: req.params.id },
-        { likes: publication.likes, usersLiked: publication.usersLiked }
+        {
+          likes: publication.likes,
+          usersLiked: publication.usersLiked,
+        },
+        { returnNewDocument: true }
       )
 
         .then((newPublication) => {
-          // console.log(
-          //   "🚀 ~ file: controllersPub.js ~ line 165 ~ .then ~ newPublication",
-          //   newPublication
-          // );
+          console.log(
+            "🚀 ~ file: controllersPub.js ~ line 165 ~ .then ~ newPublication",
+            newPublication
+          );
           res.status(200).json(newPublication);
         })
         .catch((error) => {

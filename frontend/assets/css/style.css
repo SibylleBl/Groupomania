@@ -115,14 +115,20 @@ header .nav_bar {
 .index .posts .post .pub img {
   width: 300px;
 }
-.index .posts .post .like_dislike {
+.index .posts .post .buttons {
+  display: flex;
+  align-items: center;
+}
+.index .posts .post .buttons .like_dislike {
   display: flex;
   justify-content: space-around;
   align-items: center;
   padding: 1em;
   background-color: #9ec8db;
-  border-radius: 0px 0px 15px 15px;
   color: #3f6182;
+}
+.index .user-card .user-img {
+  width: 100px;
 }
 .index .column {
   display: flex;
