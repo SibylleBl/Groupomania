@@ -50,9 +50,15 @@ exports.login = (req, res) => {
                 userId: user._id,
                 name: user.name,
                 email: user.email,
+                imageUrl: user.imageUrl,
                 isAdmin: user.isAdmin,
                 token: jsonWebToken.sign(
-                  { userId: user._id, isAdmin: user.isAdmin, name: user.name },
+                  {
+                    userId: user._id,
+                    isAdmin: user.isAdmin,
+                    name: user.name,
+                    imageUrl: user.imageUrl,
+                  },
                   process.env.SECRET_TOKEN,
                   { expiresIn: "24h" }
                 ),

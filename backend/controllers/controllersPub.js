@@ -120,7 +120,7 @@ exports.getOnePublication = (req, res) => {
 
 exports.getAllPublications = (req, res) => {
   Publications.find()
-    .sort({ createdAt: 1 })
+    .sort({ createdAt: -1 })
 
     .then((allPub) => {
       res.status(200).json(allPub);

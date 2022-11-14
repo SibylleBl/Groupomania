@@ -14,6 +14,7 @@ module.exports = (req, res, next) => {
     const userId = decodedToken.userId;
     const isAdmin = decodedToken.isAdmin;
     const name = decodedToken.name;
+    const imageUrl = decodedToken.imageUrl;
 
     // console.log("🚀 ~ file: auth.js ~ line 17 ~ name", name);
     // console.log("🚀 ~ file: auth.js ~ line 15 ~ admin", isAdmin);
@@ -24,6 +25,7 @@ module.exports = (req, res, next) => {
       userId: userId,
       isAdmin: isAdmin,
       name: name,
+      imageUrl: imageUrl,
     };
 
     if (req.body.userId && req.body.userId !== userId && !isAdmin) {

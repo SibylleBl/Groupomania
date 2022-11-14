@@ -9,11 +9,13 @@
         <post
           :userImg="publication.userImg"
           :username="publication.username"
+          :userId="publication.userId"
           :title="publication.title"
           :message="publication.message"
           :imageUrl="publication.imageUrl"
           :_id="publication._id"
           :likes="publication.likes"
+          :usersLiked="publication.usersLiked"
           class="pub"
           @delete-my-post="deletePost(publication._id)"
           @update-post="updatePost"
@@ -29,7 +31,7 @@
           <font-awesome-icon icon="fa-solid fa-user" /> Mon profil
         </NuxtLink>
       </div>
-      <div class="contact">
+      <div class="contact" v-if="$auth.loggedIn" {{ $auth.$state.user.name }}>
         <p>Vous connaissez peut-être:</p>
 
         <div class="users">

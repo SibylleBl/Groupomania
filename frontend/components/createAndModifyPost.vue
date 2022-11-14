@@ -1,28 +1,30 @@
 <template>
-  <form method="post">
-    <div>
-      <label for="imageUrl">Image:</label>
-      <img v-if="mode === 'modify'" :src="data.imageUrl" />
-      <input id="imageUrl" type="file" ref="file" @change="uploadImg" />
-    </div>
-    <div>
-      <label for="title">Titre:</label>
-      <input
-        id="title"
-        v-model="data.title"
-        ref="title"
-        @change="uploadTitle"
-      />
-    </div>
+  <form class="createAndModify" method="post">
+    <div class="blocks">
+      <div class="block">
+        <label for="imageUrl"></label>
+        <img v-if="mode === 'modify'" :src="data.imageUrl" />
+        <input id="imageUrl" type="file" ref="file" @change="uploadImg" />
+      </div>
+      <div class="block">
+        <label for="title"></label>
+        <input
+          id="title"
+          v-model="data.title"
+          ref="title"
+          @change="uploadTitle"
+        />
+      </div>
 
-    <div>
-      <label for="message">Message:</label>
-      <textarea
-        id="message"
-        v-model="data.message"
-        ref="message"
-        @change="uploadMessage"
-      />
+      <div class="block">
+        <label for="message"></label>
+        <textarea
+          id="message"
+          v-model="data.message"
+          ref="message"
+          @change="uploadMessage"
+        />
+      </div>
     </div>
     <button type="submit" v-if="mode === 'modify'" @click="modifyPost()">
       Enregistrer
@@ -83,11 +85,6 @@ export default {
           headers,
         }
       );
-      console.log(
-        "🚀 ~ file: createAndModifyPost.vue ~ line 86 ~ modifyPost ~ res",
-        res
-      );
-      this.$router.push("/");
     },
 
     async createPost() {

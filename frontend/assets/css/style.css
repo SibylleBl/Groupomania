@@ -58,6 +58,10 @@ button:hover:before,
 .link:hover:before {
   width: 100%;
 }
+button .button-red,
+.link .button-red {
+  background-color: #ff584d;
+}
 
 header {
   display: flex;
@@ -100,10 +104,24 @@ header .nav_bar {
   display: flex;
   border-radius: 15px 15px 0px 0px;
   background-color: #9ec8db;
+  padding-top: 20px;
   color: #3f6182;
 }
 .index .posts .post .user_pub .p {
   width: 100px;
+}
+.index .posts .post .user_pub .user-info {
+  display: flex;
+  align-items: center;
+}
+.index .posts .post .user_pub .user-info .profil-picture {
+  width: 100px;
+  margin-right: 20px;
+  border: 3px solid;
+}
+.index .posts .post .user_pub .publication-info {
+  display: flex;
+  flex-direction: column;
 }
 .index .posts .post .pub {
   display: flex;
@@ -145,6 +163,40 @@ header .nav_bar {
 .index .column .users .user {
   margin: 1em;
   border: 5px solid #9ec8db;
+}
+
+.createAndModify {
+  display: flex;
+  flex-direction: column;
+  margin: 30px auto;
+  align-items: center;
+  width: 40%;
+  background-color: #9ec8db;
+}
+.createAndModify .blocks {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.createAndModify .blocks .block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: large;
+  margin: 15px;
+}
+.createAndModify .blocks .block #title,
+.createAndModify .blocks .block #message,
+.createAndModify .blocks .block #imageUrl {
+  background-color: white;
+  border: 5px solid;
+  border-color: #3f6182;
+  padding: 5px;
+  cursor: pointer;
+}
+.createAndModify .blocks .block img {
+  width: 200px;
+  margin-bottom: 10px;
 }
 
 /*# sourceMappingURL=style.css.map */

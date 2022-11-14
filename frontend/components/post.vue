@@ -1,20 +1,29 @@
 <template>
   <div class="user_pub">
     <!-- ici le nom de la personne qui à créé la pub et sa photo -->
-    <img :src="`${userImg}`" />
-    <h2>{{ username }}</h2>
-    <h2>{{ title }}</h2>
-    <img :src="`${imageUrl}`" />
-    <p>{{ message }}</p>
+    <div class="user-info">
+      <img class="profil-picture" :src="`${userImg}`" />
+      <h2>{{ username }}</h2>
+    </div>
+    <div class="publication-info">
+      <h2>{{ title }}</h2>
+      <img :src="`${imageUrl}`" />
+      <p>{{ message }}</p>
+    </div>
 
     <div class="buttons">
       <button type="submit" @click="$emit('delete-my-post', deletePost(_id))">
         <font-awesome-icon icon="fa-solid fa-trash" />
       </button>
       <div class="like_dislike">
-        <button type="submit" @click="likePost">
+        <button
+          :class="[{ 'button-red': usersLiked.includes(userId) }]"
+          type="submit"
+          @click="likePost"
+        >
           <font-awesome-icon icon="fa-solid fa-thumbs-up" />
         </button>
+
         <div class="counterLike">{{ likes }}</div>
       </div>
       <NuxtLink class="link" :to="`/modifyPublication/${_id}`">
@@ -34,7 +43,9 @@ export default {
     "_id",
     "likes",
     "username",
+    "userId",
     "userImg",
+    "usersLiked",
   ],
 
   methods: {
@@ -53,7 +64,6 @@ export default {
         const post = await this.$axios.$post(
           `http://localhost:3001/api/publications/${this._id}/like/`
         );
-        console.log("🚀 ~ file: post.vue ~ line 51 ~ likePost ~ post", post);
 
         this.$emit("update-post", post);
       } catch ({ response }) {
