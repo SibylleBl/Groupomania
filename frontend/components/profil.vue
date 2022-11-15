@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="user-info">
+    <img :src="`${imageUrl}`" />
     <h2>{{ name }}</h2>
     <p>{{ email }}</p>
-    <img :src="`${imageUrl}`" />
   </div>
 </template>
 

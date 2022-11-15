@@ -1,14 +1,14 @@
 <template>
   <div class="user_pub">
     <!-- ici le nom de la personne qui à créé la pub et sa photo -->
+    <div class="publication-info">
+      <img :src="`${imageUrl}`" />
+      <h2>{{ title }}</h2>
+      <p>{{ message }}</p>
+    </div>
     <div class="user-info">
       <img class="profil-picture" :src="`${userImg}`" />
       <h2>{{ username }}</h2>
-    </div>
-    <div class="publication-info">
-      <h2>{{ title }}</h2>
-      <img :src="`${imageUrl}`" />
-      <p>{{ message }}</p>
     </div>
 
     <div class="buttons">
@@ -17,9 +17,9 @@
       </button>
       <div class="like_dislike">
         <button
+          @click="likePost"
           :class="[{ 'button-red': usersLiked.includes(userId) }]"
           type="submit"
-          @click="likePost"
         >
           <font-awesome-icon icon="fa-solid fa-thumbs-up" />
         </button>

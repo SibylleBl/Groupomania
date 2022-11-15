@@ -1,23 +1,31 @@
 <template>
-  <form method="put">
-    <div>
-      <label for="name">Nom:</label>
-      <input id="name" v-model="modify.name" ref="name" @change="uploadName" />
-    </div>
-    <div>
-      <label for="email">Adresse mail:</label>
-      <input
-        id="email"
-        v-model="modify.email"
-        ref="email"
-        @change="uploadEmail"
-      />
-    </div>
-    <div>
-      <label for="imageUrl">Photo de profil:</label>
-      <input id="imageUrl" type="file" ref="file" @change="uploadImg" />
-    </div>
+  <form class="modifyProfil" method="put">
+    <div class="blocks">
+      <div class="block">
+        <label for="imageUrl">Photo de profil:</label>
 
+        <input id="imageUrl" type="file" ref="file" @change="uploadImg" />
+      </div>
+      <div class="block">
+        <label for="name">Nom:</label>
+        <input
+          id="name"
+          v-model="modify.name"
+          ref="name"
+          @change="uploadName"
+        />
+      </div>
+
+      <div class="block">
+        <label for="email">Adresse mail:</label>
+        <input
+          id="email"
+          v-model="modify.email"
+          ref="email"
+          @change="uploadEmail"
+        />
+      </div>
+    </div>
     <button type="submit" @click="modifyUser()">Enregistrer</button>
   </form>
 </template>
