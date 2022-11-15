@@ -31,13 +31,16 @@ export default {
     async userLogin() {
       console.log(this.login);
       try {
-        await this.$auth.loginWith("local", {
-          data: this.login,
-        });
+        await this.$auth.loginWith(
+          "local",
+          {
+            data: this.login,
+          },
+          this.$router.push("/")
+        );
       } catch (err) {
         console.log(err);
       }
-      this.$router.push("/");
     },
   },
 };

@@ -17,6 +17,7 @@ button,
   border-radius: 50vw;
   font-weight: bold;
   background-color: #3f6182;
+  text-decoration: none;
   color: #e9fdfc;
   letter-spacing: 0.1rem;
   font-size: large;
@@ -58,8 +59,8 @@ button:hover:before,
 .link:hover:before {
   width: 100%;
 }
-button .button-red,
-.link .button-red {
+
+.button-red {
   background-color: #ff584d;
 }
 
@@ -87,18 +88,18 @@ header .nav_bar {
   justify-content: space-between;
 }
 .index .posts {
-  display: flex;
-  width: 60%;
+  display: block;
   justify-content: center;
   flex-wrap: wrap;
+  margin: 0;
 }
 .index .posts .post {
-  background-color: white;
+  margin: 10px;
+  background-color: #9ec8db;
+  border-radius: 10px;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
   width: 500px;
-  height: auto;
-  border-radius: 15px;
-  box-shadow: 2px 5px 16px 0px #3f6182;
-  margin-bottom: 3em;
 }
 .index .posts .post .user_pub {
   display: flex;
@@ -115,27 +116,32 @@ header .nav_bar {
   align-items: center;
 }
 .index .posts .post .user_pub .user-info .profil-picture {
-  width: 100px;
-  margin-right: 20px;
-  border: 3px solid;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
 }
 .index .posts .post .user_pub .publication-info {
   display: flex;
   flex-direction: column;
+  text-align: justify;
 }
 .index .posts .post .pub {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  color: #3f6182;
+  align-items: flex-start;
+  padding: 20px;
+  min-height: 250px;
 }
 .index .posts .post .pub img {
-  width: 300px;
+  width: 100%;
+  object-fit: cover;
 }
 .index .posts .post .buttons {
   display: flex;
   align-items: center;
+  margin: auto;
 }
 .index .posts .post .buttons .like_dislike {
   display: flex;
@@ -165,7 +171,8 @@ header .nav_bar {
   border: 5px solid #9ec8db;
 }
 
-.createAndModify {
+.createAndModify,
+.modifyProfil {
   display: flex;
   flex-direction: column;
   margin: 30px auto;
@@ -173,12 +180,14 @@ header .nav_bar {
   width: 40%;
   background-color: #9ec8db;
 }
-.createAndModify .blocks {
+.createAndModify .blocks,
+.modifyProfil .blocks {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-.createAndModify .blocks .block {
+.createAndModify .blocks .block,
+.modifyProfil .blocks .block {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -187,16 +196,95 @@ header .nav_bar {
 }
 .createAndModify .blocks .block #title,
 .createAndModify .blocks .block #message,
-.createAndModify .blocks .block #imageUrl {
+.createAndModify .blocks .block #imageUrl,
+.createAndModify .blocks .block #email,
+.createAndModify .blocks .block #name,
+.modifyProfil .blocks .block #title,
+.modifyProfil .blocks .block #message,
+.modifyProfil .blocks .block #imageUrl,
+.modifyProfil .blocks .block #email,
+.modifyProfil .blocks .block #name {
   background-color: white;
-  border: 5px solid;
+  border: 3px solid;
   border-color: #3f6182;
   padding: 5px;
   cursor: pointer;
 }
-.createAndModify .blocks .block img {
+.createAndModify .blocks .block label,
+.modifyProfil .blocks .block label {
+  color: #3f6182;
+  font-weight: bold;
+}
+.createAndModify .blocks .block img,
+.modifyProfil .blocks .block img {
   width: 200px;
   margin-bottom: 10px;
+}
+
+.profil {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.profil .profil-title {
+  color: #3f6182;
+}
+.profil .profil-user .user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 5px solid #3f6182;
+  padding: 10px;
+  margin: 10px;
+}
+.profil .profil-user .user-info img {
+  width: 200px;
+}
+.profil .profil-modify {
+  display: inline-block;
+  padding: 0.5em;
+  margin: 0.5em;
+  border: none;
+  border-radius: 50vw;
+  font-weight: bold;
+  background-color: #3f6182;
+  text-decoration: none;
+  color: #e9fdfc;
+  letter-spacing: 0.1rem;
+  font-size: large;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+.profil .profil-modify:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50vw;
+  z-index: -2;
+}
+.profil .profil-modify:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background-color: #ff584d;
+  transition: all 0.3s;
+  border-radius: 10rem;
+  z-index: -1;
+}
+.profil .profil-modify:hover {
+  color: #e9fdfc;
+}
+.profil .profil-modify:hover:before {
+  width: 100%;
 }
 
 /*# sourceMappingURL=style.css.map */

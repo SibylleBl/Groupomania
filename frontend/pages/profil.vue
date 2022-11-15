@@ -1,22 +1,15 @@
 <template>
-  <section>
-    <div>
-      <h1>Mon profil</h1>
-      <NuxtLink to="/">Page d'accueil</NuxtLink>
+  <section class="profil">
+    <h1 class="profil-title">Mon profil</h1>
 
-      <div class="user">
-        <div class="user">
-          <profil
-            :name="$auth.$state.user.name"
-            :email="$auth.$state.user.email"
-            :imageUrl="$auth.$state.user.imageUrl"
-          ></profil>
-        </div>
-        <NuxtLink to="./modifyProfil"> Modifier </NuxtLink>
-      </div>
+    <div class="profil-user">
+      <profil
+        :name="$auth.$state.user.name"
+        :email="$auth.$state.user.email"
+        :imageUrl="$auth.$state.user.imageUrl"
+      ></profil>
     </div>
-
-    <div class="myPub"></div>
+    <NuxtLink class="profil-modify" to="./modifyProfil"> Modifier </NuxtLink>
   </section>
 </template>
 
@@ -24,7 +17,6 @@
 export default {
   data() {
     return {
-      // name: "Sibylle",
       publications: [],
       user: [],
     };
