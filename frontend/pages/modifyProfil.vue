@@ -73,8 +73,56 @@ export default {
           res.status;
         });
 
-      // this.$router.push("/");
+      this.$router.push("/");
     },
   },
 };
 </script>
+
+<style lang="scss">
+@import "../assets/sass/utils/mixins";
+@import "../assets/sass/utils/variables";
+
+.modifyProfil {
+  display: flex;
+  flex-direction: column;
+  margin: 30px auto;
+  align-items: center;
+  width: 40%;
+
+  .blocks {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: large;
+      margin: 15px;
+      #title,
+      #message,
+      #imageUrl,
+      #email,
+      #name {
+        background-color: white;
+        border: 3px solid;
+        border-color: $dark;
+        padding: 5px;
+        cursor: pointer;
+      }
+
+      label {
+        color: $dark;
+        font-weight: bold;
+      }
+
+      img {
+        width: 200px;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+</style>

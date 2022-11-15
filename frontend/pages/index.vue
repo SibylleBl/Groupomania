@@ -85,3 +85,53 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+@import "../assets/sass/utils/mixins";
+@import "../assets/sass/utils/variables";
+
+.index {
+  display: flex;
+  max-width: 1440px;
+  margin-top: 5em;
+  justify-content: space-between;
+
+  .posts {
+    @include posts;
+  }
+
+  .user-card {
+    @include user-card;
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: $light;
+    width: 30%;
+    color: $dark;
+    .contact {
+      margin-top: 30px;
+    }
+    .users {
+      display: block;
+      flex-wrap: wrap;
+      .user {
+        margin: 1em;
+        background-color: white;
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+}
+
+button,
+.link {
+  @include buttonandNL;
+  text-decoration: none;
+}
+.button-red {
+  background-color: $orange;
+}
+</style>

@@ -116,7 +116,13 @@
 }
 
 @mixin user-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
   .user-img {
-    width: 100px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
   }
 }

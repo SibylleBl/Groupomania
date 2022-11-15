@@ -43,3 +43,26 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+@import "../assets/sass/utils/mixins";
+@import "../assets/sass/utils/variables";
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: $medium;
+  img {
+    width: 40%;
+    margin-left: 1rem;
+    color: $dark;
+    padding: 1em;
+  }
+
+  .nav_bar {
+    display: flex;
+    align-items: center;
+  }
+}
+</style>

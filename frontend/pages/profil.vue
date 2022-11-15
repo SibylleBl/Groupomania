@@ -33,3 +33,37 @@ export default {
   methods: {},
 };
 </script>
+
+<style lang="scss">
+@import "../assets/sass/utils/mixins";
+@import "../assets/sass/utils/variables";
+
+.profil {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  .profil-title {
+    color: $dark;
+  }
+  .profil-user {
+    width: 50%;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+    .user-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: white;
+      padding: 10px;
+
+      img {
+        width: 200px;
+        border-radius: 50%;
+      }
+    }
+  }
+  .profil-modify {
+    @include buttonandNL;
+  }
+}
+</style>
