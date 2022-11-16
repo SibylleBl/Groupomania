@@ -1,8 +1,10 @@
 <template>
   <div class="user-card">
     <img class="user-img" :src="`${imageUrl}`" />
-    <h2>{{ name }}</h2>
-    <p>{{ email }}</p>
+    <div class="user-text">
+      <h2>{{ name }}</h2>
+      <p>{{ email }}</p>
+    </div>
   </div>
 </template>
 

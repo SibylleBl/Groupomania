@@ -1,38 +1,42 @@
 <template>
-  <form class="createAndModify" method="post">
-    <div class="blocks">
-      <div class="block">
-        <label for="imageUrl"></label>
-        <img v-if="mode === 'modify'" :src="data.imageUrl" />
-        <input id="imageUrl" type="file" ref="file" @change="uploadImg" />
-      </div>
-      <div class="block">
-        <label for="title"></label>
-        <input
-          id="title"
-          v-model="data.title"
-          ref="title"
-          @change="uploadTitle"
-        />
-      </div>
+  <div class="card">
+    <form class="createAndModify" method="post">
+      <div class="blocks">
+        <h1>Créer une publication</h1>
 
-      <div class="block">
-        <label for="message"></label>
-        <textarea
-          id="message"
-          v-model="data.message"
-          ref="message"
-          @change="uploadMessage"
-        />
+        <div class="block">
+          <label for="title"></label>
+          <input
+            id="title"
+            v-model="data.title"
+            ref="title"
+            @change="uploadTitle"
+          />
+        </div>
+
+        <div class="block">
+          <label for="message"></label>
+          <textarea
+            id="message"
+            v-model="data.message"
+            ref="message"
+            @change="uploadMessage"
+          />
+        </div>
+        <div class="block">
+          <label for="imageUrl"></label>
+          <img v-if="mode === 'modify'" :src="data.imageUrl" />
+          <input id="imageUrl" type="file" ref="file" @change="uploadImg" />
+        </div>
       </div>
-    </div>
-    <button type="submit" v-if="mode === 'modify'" @click="modifyPost()">
-      Enregistrer
-    </button>
-    <button type="submit" v-if="mode === 'create'" @click="createPost()">
-      Enregistrer
-    </button>
-  </form>
+      <button type="submit" v-if="mode === 'modify'" @click="modifyPost()">
+        Enregistrer
+      </button>
+      <button type="submit" v-if="mode === 'create'" @click="createPost()">
+        Enregistrer
+      </button>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -111,44 +115,56 @@ export default {
 <style lang="scss" scoped>
 @import "../assets/sass/utils/mixins";
 @import "../assets/sass/utils/variables";
-.createAndModify {
+
+.card {
   display: flex;
   flex-direction: column;
-  margin: 30px auto;
   align-items: center;
-  width: 40%;
+  color: $dark;
+  font-weight: bold;
 
-  .blocks {
+  .createAndModify {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    margin: 30px auto;
+    align-items: center;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+    background-color: $medium;
+    padding: 20px;
+    margin: 20px;
 
-    .block {
+    .blocks {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      font-size: large;
-      margin: 15px;
-      #title,
-      #message,
-      #imageUrl,
-      #email,
-      #name {
-        background-color: white;
-        border: 3px solid;
-        border-color: $dark;
-        padding: 5px;
-        cursor: pointer;
-      }
+      justify-content: center;
 
-      label {
-        color: $dark;
-        font-weight: bold;
-      }
+      .block {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: large;
+        margin: 15px;
+        #title,
+        #message,
+        #imageUrl,
+        #email,
+        #name {
+          background-color: white;
+          border: 1px solid;
+          border-color: $dark;
+          padding: 5px;
+          cursor: pointer;
+        }
 
-      img {
-        width: 200px;
-        margin-bottom: 10px;
+        label {
+          color: $dark;
+          font-weight: bold;
+        }
+
+        img {
+          width: 200px;
+          margin-bottom: 10px;
+        }
       }
     }
   }

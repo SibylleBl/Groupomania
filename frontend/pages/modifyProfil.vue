@@ -89,6 +89,8 @@ export default {
   margin: 30px auto;
   align-items: center;
   width: 40%;
+  background-color: $medium;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
 
   .blocks {
     display: flex;
@@ -107,7 +109,7 @@ export default {
       #email,
       #name {
         background-color: white;
-        border: 3px solid;
+        border: 1px solid;
         border-color: $dark;
         padding: 5px;
         cursor: pointer;

@@ -9,4 +9,11 @@ body {
   padding: auto;
   background-color: $light;
   font-family: "lato", "arial";
+
+  p,
+  h1,
+  h2 {
+    margin: 0;
+    padding: 0;
+  }
 }

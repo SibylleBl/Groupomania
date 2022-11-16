@@ -71,6 +71,7 @@
       .user-info {
         display: flex;
         align-items: center;
+        margin: 0.5em 0px;
         .profil-picture {
           border-radius: 50%;
           width: 40px;
@@ -96,6 +97,10 @@
       img {
         width: 100%;
         object-fit: cover;
+      }
+
+      h2 {
+        margin: 0.4em 0px;
       }
     }
 

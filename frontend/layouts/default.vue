@@ -65,4 +65,25 @@ header {
     align-items: center;
   }
 }
+
+//responsive
+
+@media only screen and (max-width: 1020px) {
+  header {
+    .nav_bar {
+      flex-direction: column;
+    }
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  header {
+    flex-direction: column;
+    a {
+      display: flex;
+      margin: auto;
+      justify-content: center;
+    }
+  }
+}
 </style>

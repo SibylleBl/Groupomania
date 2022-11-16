@@ -109,7 +109,7 @@ export default {
     flex-direction: column;
     align-items: center;
     background-color: $light;
-    width: 30%;
+    margin-right: 5%;
     color: $dark;
     .contact {
       margin-top: 30px;
@@ -117,10 +117,16 @@ export default {
     .users {
       display: block;
       flex-wrap: wrap;
+
       .user {
         margin: 1em;
         background-color: white;
         box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+        .user-text {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
       }
     }
   }
@@ -134,4 +140,40 @@ button,
 .button-red {
   background-color: $orange;
 }
+
+//responsive
+@media only screen and (max-width: 1020px) {
+  .index {
+    flex-direction: column-reverse;
+    margin-top: 1em;
+
+    .posts {
+      display: flex;
+    }
+
+    .column {
+      width: auto;
+      margin: auto;
+
+      .contact {
+        margin-top: 20px;
+      }
+
+      .users {
+        flex-direction: column;
+        .user {
+          .user-card {
+            flex-direction: row;
+            .user-text {
+              align-items: flex-start;
+              margin-left: 2px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// mobile
 </style>

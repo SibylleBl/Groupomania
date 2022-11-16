@@ -1,47 +1,51 @@
 <template>
-  <form method="post">
-    <h3>Inscription</h3>
-    <div>
-      <label for="name">Name:</label>
-      <input
-        id="name"
-        type="text"
-        ref="name"
-        v-model="register.name"
-        @change="uploadName"
-      />
-      <p id="nameError"></p>
-    </div>
-    <div>
-      <label for="email">Adresse mail:</label>
-      <input
-        id="email"
-        type="text"
-        ref="email"
-        v-model="register.email"
-        @change="uploadEmail"
-      />
-      <p id="emailError"></p>
-    </div>
-    <div>
-      <label for="password">Mot de passe:</label>
-      <input
-        id="password"
-        type="text"
-        ref="password"
-        v-model="register.password"
-        @change="uploadPassword"
-      />
-      <p id="passwordError"></p>
-    </div>
+  <div class="acces-card">
+    <h1>Inscription</h1>
+    <form class="inscription" method="post">
+      <div class="block">
+        <label for="name">Name:</label>
+        <input
+          id="name"
+          type="text"
+          ref="name"
+          v-model="register.name"
+          @change="uploadName"
+        />
+        <p id="nameError"></p>
+      </div>
+      <div class="block">
+        <label for="email">Adresse mail:</label>
+        <input
+          id="email"
+          type="text"
+          ref="email"
+          v-model="register.email"
+          @change="uploadEmail"
+        />
+        <p id="emailError"></p>
+      </div>
+      <div class="block">
+        <label for="password">Mot de passe:</label>
+        <input
+          id="password"
+          type="text"
+          ref="password"
+          v-model="register.password"
+          @change="uploadPassword"
+        />
+        <p id="passwordError"></p>
+      </div>
 
-    <div>
-      <label for="image">image</label>
-      <input id="image" type="file" ref="file" @change="uploadImg" />
-    </div>
+      <div class="block">
+        <label for="image">Photo de profil:</label>
+        <input id="image" type="file" ref="file" @change="uploadImg" />
+      </div>
 
-    <button type="submit" @click="registerUser">Submit</button>
-  </form>
+      <div class="block">
+        <button type="submit" @click="registerUser">S'inscrire</button>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -94,3 +98,42 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+@import "../assets/sass/utils/mixins";
+@import "../assets/sass/utils/variables";
+
+.acces-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: $dark;
+  font-weight: bold;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+  background-color: $medium;
+  padding: 20px;
+  margin: 20px;
+
+  .inscription {
+    display: block;
+    width: auto;
+    align-items: center;
+    .block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 5px;
+    }
+    button {
+      @include buttonandNL;
+    }
+
+    input {
+      border: 1px solid $dark;
+    }
+
+    #image {
+      background-color: white;
+    }
+  }
+}
+</style>
