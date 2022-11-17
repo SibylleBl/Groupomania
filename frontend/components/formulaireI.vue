@@ -89,11 +89,13 @@ export default {
       formData.append("email", this.email);
       formData.append("password", this.password);
 
-      this.$axios.$post("http://localhost:3001/api/auth/signup", formData, {
-        headers,
-      });
-
-      this.$router.push("/");
+      this.$axios
+        .$post("http://localhost:3001/api/auth/signup", formData, {
+          headers,
+        })
+        .then((res) => {
+          this.$router.push("/");
+        });
     },
   },
 };

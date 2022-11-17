@@ -7,6 +7,7 @@
         class="post"
       >
         <post
+          :isAdmin="$auth.$state.user.isAdmin"
           :userImg="publication.userImg"
           :username="publication.username"
           :userId="publication.userId"
@@ -77,6 +78,7 @@ export default {
     updatePost(post) {
       this.publications = this.publications.map((publication) => {
         if (publication._id === post._id) {
+          console.log(publication);
           return post;
         }
         return publication;
@@ -174,6 +176,4 @@ button,
     }
   }
 }
-
-// mobile
 </style>

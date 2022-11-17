@@ -69,11 +69,8 @@ export default {
           headers,
         })
         .then((res) => {
-          res.data.files;
-          res.status;
+          this.$router.push("/");
         });
-
-      this.$router.push("/");
     },
   },
 };

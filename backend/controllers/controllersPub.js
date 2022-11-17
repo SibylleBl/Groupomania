@@ -16,6 +16,7 @@ exports.createPublication = (req, res) => {
     userId: req.auth.userId,
     username: req.auth.name,
     userImg: req.auth.imageUrl,
+
     imageUrl: `${req.protocol}://${req.get("host")}/images/${
       req.file.filename
     }`,
