@@ -8,19 +8,14 @@
       </div>
       <div class="block">
         <label for="name">Nom:</label>
-        <input
-          id="name"
-          v-model="modify.name"
-          ref="name"
-          @change="uploadName"
-        />
+        <input id="name" v-model="data.name" ref="name" @change="uploadName" />
       </div>
 
       <div class="block">
         <label for="email">Adresse mail:</label>
         <input
           id="email"
-          v-model="modify.email"
+          v-model="data.email"
           ref="email"
           @change="uploadEmail"
         />
@@ -34,12 +29,23 @@
 export default {
   data() {
     return {
-      modify: {
-        name: "",
-        email: "",
-        imageUrl: "",
+      data: {
+        name: "mon nom",
+        email: "mon email",
+        imageUrl: null,
       },
     };
+  },
+
+  async fetch() {
+    try {
+      const data = await this.$axios.$get(
+        `http://localhost:3001/api/auth/me/${this.$route.params.id}`
+      );
+      this.data = { ...data };
+    } catch ({ res }) {
+      console.log(res);
+    }
   },
 
   methods: {

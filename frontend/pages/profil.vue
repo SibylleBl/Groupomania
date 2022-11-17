@@ -9,7 +9,12 @@
         :imageUrl="$auth.$state.user.imageUrl"
       ></profil>
     </div>
-    <NuxtLink class="profil-modify" to="./modifyProfil"> Modifier </NuxtLink>
+    <NuxtLink
+      class="profil-modify"
+      :to="`/modifyProfil/${$auth.$state.user._id}`"
+    >
+      Modifier
+    </NuxtLink>
   </section>
 </template>
 

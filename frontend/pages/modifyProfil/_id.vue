@@ -1,0 +1,3 @@
+<template>
+  <modifyProfil />
+</template>
