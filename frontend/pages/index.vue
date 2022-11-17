@@ -68,6 +68,8 @@ export default {
     this.users = await this.$axios.$get("http://localhost:3001/api/auth/");
   },
 
+  computed: {},
+
   methods: {
     deletePost(id) {
       this.publications = this.publications.filter(
@@ -78,7 +80,6 @@ export default {
     updatePost(post) {
       this.publications = this.publications.map((publication) => {
         if (publication._id === post._id) {
-          console.log(publication);
           return post;
         }
         return publication;

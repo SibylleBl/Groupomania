@@ -22,7 +22,9 @@
       <div class="like_dislike">
         <button
           @click="likePost"
-          :class="[{ 'button-red': usersLiked.includes(userId) }]"
+          :class="[
+            { 'button-red': usersLiked.includes($auth.$state.user._id) },
+          ]"
           type="submit"
         >
           <font-awesome-icon icon="fa-solid fa-thumbs-up" />
