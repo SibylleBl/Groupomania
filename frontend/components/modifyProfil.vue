@@ -3,19 +3,24 @@
     <div class="blocks">
       <div class="block">
         <label for="imageUrl">Photo de profil:</label>
-
+        <img :src="data.user.imageUrl" />
         <input id="imageUrl" type="file" ref="file" @change="uploadImg" />
       </div>
       <div class="block">
         <label for="name">Nom:</label>
-        <input id="name" v-model="data.name" ref="name" @change="uploadName" />
+        <input
+          id="name"
+          v-model="data.user.name"
+          ref="name"
+          @change="uploadName"
+        />
       </div>
 
       <div class="block">
         <label for="email">Adresse mail:</label>
         <input
           id="email"
-          v-model="data.email"
+          v-model="data.user.email"
           ref="email"
           @change="uploadEmail"
         />
@@ -30,19 +35,24 @@ export default {
   data() {
     return {
       data: {
-        name: "mon nom",
-        email: "mon email",
-        imageUrl: null,
+        user: {
+          name: "mon nom",
+          email: "mon email",
+          imageUrl: null,
+        },
       },
     };
   },
 
   async fetch() {
     try {
-      const data = await this.$axios.$get(
-        `http://localhost:3001/api/auth/me/${this.$route.params.id}`
-      );
+      const data = await this.$axios.$get(`http://localhost:3001/api/auth/me`);
+
       this.data = { ...data };
+      console.log(
+        "🚀 ~ file: modifyProfil.vue ~ line 48 ~ fetch ~ data",
+        this.data
+      );
     } catch ({ res }) {
       console.log(res);
     }
@@ -61,7 +71,7 @@ export default {
       this.email = this.$refs.email.value;
     },
 
-    modifyUser() {
+    async modifyUser() {
       const headers = {
         "Content-Type": "multipart/form-data",
       };
@@ -70,13 +80,14 @@ export default {
       formData.append("name", this.name);
       formData.append("email", this.email);
 
-      this.$axios
-        .$put("http://localhost:3001/api/auth/modifyUser", formData, {
+      const res = await this.$axios.$put(
+        "http://localhost:3001/api/auth/modifyUser",
+        formData,
+        {
           headers,
-        })
-        .then((res) => {
-          this.$router.push("/");
-        });
+        }
+      );
+      this.$router.push("/");
     },
   },
 };

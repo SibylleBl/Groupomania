@@ -2,7 +2,7 @@
   <div class="card">
     <form class="createAndModify" method="post">
       <div class="blocks">
-        <h1>Créer une publication</h1>
+        <h1 @click="$router.push({ path: '/' })">Créer une publication</h1>
 
         <div class="block">
           <label for="title"></label>
@@ -87,7 +87,8 @@ export default {
         formData,
         {
           headers,
-        }
+        },
+        this.$router.push({ path: "/" })
       );
     },
 
@@ -100,13 +101,14 @@ export default {
       formData.append("title", this.title);
       formData.append("message", this.message);
 
-      await this.$axios
-        .$post("http://localhost:3001/api/publications/", formData, {
+      const res = await this.$axios.$post(
+        "http://localhost:3001/api/publications/",
+        formData,
+        {
           headers,
-        })
-        .then((res) => {
-          this.$router.push("/");
-        });
+        },
+        this.$router.push({ path: "/" })
+      );
     },
   },
 };

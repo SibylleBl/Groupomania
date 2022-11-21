@@ -150,7 +150,7 @@ exports.likePublication = (req, res) => {
           likes: publication.likes,
           usersLiked: publication.usersLiked,
         },
-        { returnNewDocument: true }
+        { returnDocument: "after" }
       )
 
         .then((newPublication) => {

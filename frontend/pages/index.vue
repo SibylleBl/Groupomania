@@ -32,11 +32,17 @@
           <font-awesome-icon icon="fa-solid fa-user" /> Mon profil
         </NuxtLink>
       </div>
-      <div class="contact" v-if="$auth.loggedIn" {{ $auth.$state.user.name }}>
+      <div class="contact" v-if="$auth.loggedIn">
         <p>Vous connaissez peut-être:</p>
 
         <div class="users">
-          <div v-for="user in users" :key="user.name" class="user">
+          <div
+            v-for="user in users.filter(
+              (user) => user._id !== this.$auth.$state.user._id
+            )"
+            :key="user.name"
+            class="user"
+          >
             <userList
               :name="user.name"
               :email="user.email"
@@ -56,8 +62,6 @@ export default {
     return {
       publications: [],
       users: [],
-
-      likes: Number,
     };
   },
 
@@ -67,8 +71,6 @@ export default {
     );
     this.users = await this.$axios.$get("http://localhost:3001/api/auth/");
   },
-
-  computed: {},
 
   methods: {
     deletePost(id) {
@@ -112,8 +114,10 @@ export default {
     flex-direction: column;
     align-items: center;
     background-color: $light;
-    margin-right: 5%;
+
     color: $dark;
+    width: auto;
+
     .contact {
       margin-top: 30px;
     }
@@ -153,6 +157,9 @@ button,
 
     .posts {
       display: flex;
+      .post {
+        width: 600px;
+      }
     }
 
     .column {
@@ -164,8 +171,14 @@ button,
       }
 
       .users {
-        flex-direction: column;
+        display: flex;
+        margin: auto;
+        width: auto;
+        flex-direction: row;
+        flex-wrap: wrap;
+
         .user {
+          width: 40%;
           .user-card {
             flex-direction: row;
             .user-text {
@@ -173,6 +186,27 @@ button,
               margin-left: 2px;
             }
           }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .index {
+    .posts {
+      display: flex;
+      .post {
+        width: auto;
+      }
+    }
+
+    .column {
+      .users {
+        flex-direction: column;
+        .user {
+          width: 100%;
+          margin: 2px;
         }
       }
     }

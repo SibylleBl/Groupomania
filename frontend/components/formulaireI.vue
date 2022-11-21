@@ -94,7 +94,7 @@ export default {
           headers,
         })
         .then((res) => {
-          this.$router.push("/");
+          this.$router.push({ path: "/" });
         });
     },
   },
