@@ -158,7 +158,7 @@ button,
     .posts {
       display: flex;
       .post {
-        width: 600px;
+        width: auto;
       }
     }
 
