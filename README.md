@@ -46,7 +46,7 @@ https://sass-lang.com/install
 Puis, ajoutez la ligne suivante dans votre fichier "nuxt.config.js":
 
 css: [
-"@/assets/sass/style.scss",
+"@/assets/sass/style.scss"
 ]
 
 Enfin, pour lancer Sass, positionnez-vous dans le dossier frontend et tapez la commande suivante:
