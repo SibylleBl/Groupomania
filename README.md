@@ -1,5 +1,11 @@
 # GROUPOMANIA - Réseau social d'entreprise
 
+Technologies utilisées pour ce projet:
+-NodeJS
+-MongoDB
+-Nuxt.js
+-Sass
+
 # Installation et lancement:
 
 # BACKEND
