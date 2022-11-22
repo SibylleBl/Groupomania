@@ -2,7 +2,7 @@
 
 Technologies utilisées pour ce projet:
 
-- NodeJS
+- NodeJS et Express
 - MongoDB
 - Nuxt.js
 - Sass
@@ -16,8 +16,11 @@ Technologies utilisées pour ce projet:
 Ouvrez le terminal puis positionnez-vous dans le dossier "backend" afin de tapez la commande suivante:
 `npm install node server`
 
-Ensuite, installez MongoDB:
-https://www.mongodb.com/docs/manual/installation/
+puis installez Express:
+`npm install express`
+
+Ensuite, installez MongoDB en entrant la commande suivante:
+`npm install mongoose`
 
 Dirigez-vous dans le fichier .env et remplissez le champs suivant de votre identifiant mongoDB:
 
@@ -32,22 +35,14 @@ Positionnez-vous dans le dossier backend puis rentrez la commande suivante dans 
 
 ## Installation du framework Nuxt.js:
 
-Positionnez-vous dans le dossier frontend afin d'installer Nuxt.js:
-https://nuxtjs.org/docs/get-started/installation/
+Positionnez-vous dans le dossier frontend afin d'installer Nuxt.js. Entrez la commande suivante:
+
+`npm install nuxt`
 
 Puis, lancez Nuxt toujours dans le dossier frontend avec la commande suivante:
 `npm run dev`
 
-## Installation et lancement de SASS:
+## Lancement de SASS:
 
-Dans un premier temps, suivre les indications d'installations de Sass:
-https://sass-lang.com/install
-
-Puis, ajoutez la ligne suivante dans votre fichier "nuxt.config.js":
-
-css: [
-"@/assets/sass/style.scss"
-]
-
-Enfin, pour lancer Sass, positionnez-vous dans le dossier frontend et tapez la commande suivante:
+Pour lancer Sass, positionnez-vous dans le dossier frontend et tapez la commande suivante:
 `npm run sass`
