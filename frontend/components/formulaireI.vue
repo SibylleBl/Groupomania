@@ -94,9 +94,9 @@ export default {
         formData,
         {
           headers,
-        }
+        },
+        this.$router.push({ path: "/" })
       );
-      this.$router.push({ path: "/" });
     },
   },
 };
