@@ -47,12 +47,7 @@ export default {
   async fetch() {
     try {
       const data = await this.$axios.$get(`http://localhost:3001/api/auth/me`);
-
       this.data = { ...data };
-      console.log(
-        "🚀 ~ file: modifyProfil.vue ~ line 48 ~ fetch ~ data",
-        this.data
-      );
     } catch ({ res }) {
       console.log(res);
     }
@@ -87,7 +82,7 @@ export default {
           headers,
         }
       );
-      this.$router.push("/");
+      this.$router.push({ path: "/" });
     },
   },
 };

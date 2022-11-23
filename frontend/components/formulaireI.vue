@@ -79,7 +79,7 @@ export default {
       this.password = this.$refs.password.value;
     },
 
-    registerUser() {
+    async registerUser() {
       const headers = {
         "Content-Type": "multipart/form-data",
       };
@@ -89,13 +89,14 @@ export default {
       formData.append("email", this.email);
       formData.append("password", this.password);
 
-      this.$axios
-        .$post("http://localhost:3001/api/auth/signup", formData, {
+      const res = await this.$axios.$post(
+        "http://localhost:3001/api/auth/signup",
+        formData,
+        {
           headers,
-        })
-        .then((res) => {
-          this.$router.push({ path: "/" });
-        });
+        }
+      );
+      this.$router.push({ path: "/" });
     },
   },
 };
