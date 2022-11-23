@@ -7,7 +7,6 @@ const path = require("path");
 
 const userRoutes = require("./routes/routeUser.js");
 const publicationsRoutes = require("./routes/routePub");
-const commentairesRoutes = require("./routes/routeCom");
 
 mongoose
   .connect(process.env.MONGO_ID, {
