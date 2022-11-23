@@ -6,26 +6,16 @@
 
         <div class="block">
           <label for="title"></label>
-          <input
-            id="title"
-            v-model="data.title"
-            ref="title"
-            @change="uploadTitle"
-          />
+          <input id="title" v-model="form.title" ref="title" />
         </div>
 
         <div class="block">
           <label for="message"></label>
-          <textarea
-            id="message"
-            v-model="data.message"
-            ref="message"
-            @change="uploadMessage"
-          />
+          <textarea id="message" v-model="form.message" ref="message" />
         </div>
         <div class="block">
           <label for="imageUrl"></label>
-          <img v-if="mode === 'modify'" :src="data.imageUrl" />
+          <img v-if="mode === 'modify'" :src="form.imageUrl" />
           <input id="imageUrl" type="file" ref="file" @change="uploadImg" />
         </div>
       </div>
@@ -44,7 +34,7 @@ export default {
   props: ["mode"],
   data() {
     return {
-      data: {
+      form: {
         imageUrl: null,
         message: "Mon message",
         title: "Mon titre",
@@ -57,7 +47,7 @@ export default {
       const data = await this.$axios.$get(
         `http://localhost:3001/api/publications/${this.$route.params.id}`
       );
-      this.data = { ...data };
+      this.form = { ...data };
     } catch ({ res }) {
       console.log(res);
     }
@@ -65,23 +55,19 @@ export default {
 
   methods: {
     uploadImg() {
-      this.imageUrl = this.$refs.file.files[0];
+      this.form.imageUrl = this.$refs.file.files[0];
     },
-    uploadTitle() {
-      this.title = this.$refs.title.value;
-    },
-    uploadMessage() {
-      this.message = this.$refs.message.value;
-    },
+
     async modifyPost() {
       const headers = {
         "Content-Type": "multipart/form-data",
       };
 
       const formData = new FormData();
-      formData.append("image", this.imageUrl);
-      formData.append("title", this.title);
-      formData.append("message", this.message);
+
+      formData.append("image", this.form.imageUrl);
+      formData.append("title", this.form.title);
+      formData.append("message", this.form.message);
       const res = await this.$axios.$put(
         "http://localhost:3001/api/publications/" + this.$route.params.id,
         formData,
@@ -97,9 +83,9 @@ export default {
         "Content-Type": "multipart/form-data",
       };
       const formData = new FormData();
-      formData.append("image", this.imageUrl);
-      formData.append("title", this.title);
-      formData.append("message", this.message);
+      formData.append("image", this.form.imageUrl);
+      formData.append("title", this.form.title);
+      formData.append("message", this.form.message);
 
       const res = await this.$axios.$post(
         "http://localhost:3001/api/publications/",

@@ -114,9 +114,14 @@ export default {
     flex-direction: column;
     align-items: center;
     background-color: $light;
-
     color: $dark;
     width: auto;
+
+    .welcome {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
     .contact {
       margin-top: 30px;

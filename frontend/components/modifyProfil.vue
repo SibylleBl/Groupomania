@@ -3,27 +3,17 @@
     <div class="blocks">
       <div class="block">
         <label for="imageUrl">Photo de profil:</label>
-        <img :src="data.user.imageUrl" />
+        <img :src="form.user.imageUrl" />
         <input id="imageUrl" type="file" ref="file" @change="uploadImg" />
       </div>
       <div class="block">
         <label for="name">Nom:</label>
-        <input
-          id="name"
-          v-model="data.user.name"
-          ref="name"
-          @change="uploadName"
-        />
+        <input id="name" v-model="form.user.name" ref="name" />
       </div>
 
       <div class="block">
         <label for="email">Adresse mail:</label>
-        <input
-          id="email"
-          v-model="data.user.email"
-          ref="email"
-          @change="uploadEmail"
-        />
+        <input id="email" v-model="form.user.email" ref="email" />
       </div>
     </div>
     <button type="submit" @click="modifyUser()">Enregistrer</button>
@@ -34,7 +24,7 @@
 export default {
   data() {
     return {
-      data: {
+      form: {
         user: {
           name: "mon nom",
           email: "mon email",
@@ -47,7 +37,7 @@ export default {
   async fetch() {
     try {
       const data = await this.$axios.$get(`http://localhost:3001/api/auth/me`);
-      this.data = { ...data };
+      this.form = { ...data };
     } catch ({ res }) {
       console.log(res);
     }
@@ -55,15 +45,7 @@ export default {
 
   methods: {
     uploadImg() {
-      this.imageUrl = this.$refs.file.files[0];
-    },
-
-    uploadName() {
-      this.name = this.$refs.name.value;
-    },
-
-    uploadEmail() {
-      this.email = this.$refs.email.value;
+      this.form.imageUrl = this.$refs.file.files[0];
     },
 
     async modifyUser() {
@@ -71,9 +53,9 @@ export default {
         "Content-Type": "multipart/form-data",
       };
       const formData = new FormData();
-      formData.append("image", this.imageUrl);
-      formData.append("name", this.name);
-      formData.append("email", this.email);
+      formData.append("image", this.form.user.imageUrl);
+      formData.append("name", this.form.user.name);
+      formData.append("email", this.form.user.email);
 
       const res = await this.$axios.$put(
         "http://localhost:3001/api/auth/modifyUser",
@@ -82,6 +64,18 @@ export default {
           headers,
         }
       );
+
+      const userToUpdate = { ...this.$auth.user };
+      userToUpdate.name = this.form.user.name;
+      userToUpdate.email = this.form.user.email;
+      userToUpdate.imageUrl = this.form.user.imageUrl;
+
+      this.$auth.setUser(
+        userToUpdate.name,
+        userToUpdate.email,
+        userToUpdate.imageUrl
+      );
+
       this.$router.push({ path: "/" });
     },
   },
