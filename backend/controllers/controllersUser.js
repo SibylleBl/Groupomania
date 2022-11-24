@@ -20,12 +20,10 @@ exports.signup = (req, res) => {
         .save()
         .then(() => res.status(201).json({ message: "Utilisateur créé !" }))
         .catch((error) => {
-          // console.log(newUser);
           res.status(400).json({ error: error });
         });
     })
     .catch((error) => {
-      // console.log(req);
       res.status(500).json({ error: error });
     });
 };
